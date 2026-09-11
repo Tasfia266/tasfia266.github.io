@@ -4,10 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tasfia Nuzhat · Researcher</title>
-<meta name="description" content="PhD researcher at UCF working on large language models, agentic AI safety, and trustworthy machine learning, with generative diffusion for scientific applications." />
+<meta name="description" content="PhD researcher at UCF working on multi-objective optimization for generative diffusion, and expanding into AI safety, reasoning, and alignment for LLM agents." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<!-- Fonts load asynchronously so a slow/blocked font CDN never blocks the page from rendering. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
 <style>
@@ -21,13 +20,8 @@
     --accent: #0d7a68;
     --accent-soft: #dcf0ea;
     --accent-ink: #0a5c4f;
-    --pill-bg: #e8e5d8;
-    --pill-ink: #33413c;
-    --hot-bg: #fdf1da;
-    --hot-border: #c8860f;
-    --hot-ink: #7a5209;
+    --warn-ink: #9a6a12;
     --shadow: 0 1px 2px rgba(20, 24, 22, 0.05), 0 8px 24px rgba(20, 24, 22, 0.06);
-    --radius: 14px;
   }
   [data-theme="dark"] {
     --bg: #0e1512;
@@ -39,1265 +33,206 @@
     --accent: #4cd6b8;
     --accent-soft: #153029;
     --accent-ink: #7ce6cc;
-    --pill-bg: #1a2521;
-    --pill-ink: #c4d0cb;
-    --hot-bg: #2c2210;
-    --hot-border: #dba53c;
-    --hot-ink: #ffce7a;
+    --warn-ink: #e0b34e;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.25);
   }
-
   * { box-sizing: border-box; }
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 84px;
-  }
-  @media (max-width: 600px) {
-    html { scroll-padding-top: 72px; }
-  }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
   body {
     margin: 0;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.6;
+    line-height: 1.65;
     font-size: 15.5px;
     -webkit-font-smoothing: antialiased;
     transition: background 0.3s ease, color 0.3s ease;
   }
   ::selection { background: var(--accent); color: var(--bg); }
-  h1, h2, h3, h4 {
+  h1, h2, h3 {
     font-family: 'Fraunces', Georgia, serif;
     font-weight: 500;
     letter-spacing: -0.01em;
     line-height: 1.2;
     margin: 0;
   }
-  a {
-    color: var(--accent-ink);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s, color 0.15s;
-  }
+  a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
   a:hover { border-bottom-color: var(--accent); }
+  .mono { font-family: 'JetBrains Mono', monospace; }
 
-  /* TOP NAVBAR */
+  /* NAV — slim single bar, no icon row, no dropdown */
   .nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
     border-bottom: 1px solid var(--line);
   }
   .nav-inner {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 14px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    max-width: 720px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
   }
-  .nav-left { display: flex; align-items: center; gap: 18px; }
-  .nav-brand {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 17px;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    border: none;
-  }
+  .nav-brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; color: var(--ink); border: none; }
   .nav-brand .dot { color: var(--accent); }
-  .nav-icons {
-    display: flex;
-    gap: 6px;
-  }
-  .nav-icons a {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    color: var(--ink-soft);
-    border: none;
-    transition: all 0.18s ease;
-  }
-  .nav-icons a:hover {
-    color: var(--accent);
-    background: var(--accent-soft);
-    transform: translateY(-1px);
-  }
-  .nav-icons svg { width: 20px; height: 20px; }
-  .nav-links { display: flex; gap: 22px; align-items: center; }
-  .nav-links a {
-    color: var(--ink-soft);
-    font-size: 14px;
-    font-weight: 500;
-    border: none;
-  }
+  .nav-links { display: flex; gap: 20px; align-items: center; }
+  .nav-links a { color: var(--ink-soft); font-size: 13.5px; font-weight: 500; border: none; }
   .nav-links a:hover { color: var(--accent-ink); }
-
-  /* More dropdown */
-  .nav-more { position: relative; display: inline-block; }
-  .nav-more-btn {
-    background: none; border: none; cursor: pointer;
-    padding: 0; margin: 0;
-    font: inherit; font-size: 13.5px;
-    color: var(--ink-soft);
-    display: inline-flex; align-items: center; gap: 5px;
-    transition: color 0.15s;
-  }
-  .nav-more-btn:hover { color: var(--accent-ink); }
-  .nav-more-arrow { font-size: 9px; transition: transform 0.2s; line-height: 1; }
-  .nav-more-btn[aria-expanded="true"] .nav-more-arrow { transform: rotate(180deg); }
-  .nav-more-menu {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    min-width: 200px;
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    padding: 6px;
-    z-index: 100;
-  }
-  .nav-more-menu a {
-    display: block;
-    padding: 8px 12px;
-    font-size: 13px;
-    color: var(--ink-soft);
-    border: none;
-    border-radius: 6px;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background 0.15s, color 0.15s;
-  }
-  .nav-more-menu a:hover {
-    background: var(--accent-soft);
-    color: var(--accent-ink);
-    border: none;
-  }
   .theme-toggle {
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: grid; place-items: center;
-    color: var(--ink-soft);
-    transition: all 0.2s;
-    padding: 0;
+    background: transparent; border: 1px solid var(--line); width: 30px; height: 30px; border-radius: 8px;
+    cursor: pointer; display: grid; place-items: center; color: var(--ink-soft); transition: all 0.2s; padding: 0;
   }
   .theme-toggle:hover { color: var(--accent-ink); border-color: var(--accent); }
-  .theme-toggle svg { width: 16px; height: 16px; }
+  .theme-toggle svg { width: 15px; height: 15px; }
   .theme-toggle .moon { display: none; }
   [data-theme="dark"] .theme-toggle .sun { display: none; }
   [data-theme="dark"] .theme-toggle .moon { display: block; }
   .nav-toggle {
-    display: none;
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    width: 34px; height: 34px;
-    cursor: pointer;
-    place-items: center;
-    color: var(--ink);
-    padding: 0;
-    transition: all 0.2s;
+    display: none; background: transparent; border: 1px solid var(--line); border-radius: 8px;
+    width: 30px; height: 30px; cursor: pointer; place-items: center; color: var(--ink); padding: 0;
   }
-  .nav-toggle:hover { border-color: var(--accent); color: var(--accent-ink); }
-  .nav-toggle svg { width: 16px; height: 16px; }
-  @media (max-width: 760px) {
-    .nav-inner { padding: 12px 18px; position: relative; }
+  .nav-toggle svg { width: 15px; height: 15px; }
+  @media (max-width: 620px) {
     .nav-toggle { display: grid; }
-    .nav-icons { display: none; }
     .nav-links {
-      position: absolute;
-      top: calc(100% + 1px); left: 0; right: 0;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      background: var(--bg-elev);
-      border-bottom: 1px solid var(--line);
-      padding: 8px 0;
-      box-shadow: var(--shadow);
-      transform: translateY(-8px);
-      opacity: 0;
-      pointer-events: none;
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--bg-elev); border-bottom: 1px solid var(--line); padding: 6px 0;
+      transform: translateY(-8px); opacity: 0; pointer-events: none;
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-    .nav-links > a { padding: 12px 24px; width: 100%; display: block; }
-    .nav-links > a:hover { background: var(--accent-soft); color: var(--accent-ink); }
-    .nav-more { width: 100%; }
-    .nav-more-btn { padding: 12px 24px; width: 100%; justify-content: space-between; }
-    .nav-more-menu {
-      position: static;
-      box-shadow: none;
-      border: none;
-      background: transparent;
-      min-width: 0;
-      padding: 0;
-      margin-top: 4px;
-    }
-    .nav-more-menu a { padding: 10px 40px; }
-    .theme-toggle { margin: 10px 24px 4px; }
+    .nav-links > a, .nav-links > button.theme-toggle { margin: 4px 24px; }
+    .nav-links > a { padding: 10px 0; width: fit-content; }
   }
 
-  /* MAIN LAYOUT */
-  .wrap {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 48px 28px 0;
-  }
-  .layout {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-  @media (max-width: 860px) {
-    .layout { grid-template-columns: 1fr; gap: 40px; }
-  }
+  /* PAGE WRAP — single column throughout */
+  .page { max-width: 720px; margin: 0 auto; padding: 0 24px; }
 
-  /* SIDEBAR */
-  .sidebar {
-    position: static;
-    border-right: 1px solid var(--line);
-    padding-right: 28px;
+  /* HERO */
+  .hero { display: flex; gap: 24px; align-items: flex-start; padding: 48px 0 8px; }
+  .hero-photo {
+    width: 108px; height: 108px; border-radius: 16px; overflow: hidden; flex: 0 0 auto;
+    border: 2px solid var(--line); box-shadow: var(--shadow);
   }
-  @media (max-width: 860px) {
-    .sidebar { border-right: none; padding-right: 0; }
-  }
-  .avatar {
-    width: 140px;
-    height: 140px;
-    border-radius: 22px;
-    background: var(--accent-soft);
-    border: 3px solid var(--accent);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 18px;
-    box-shadow: var(--shadow);
-    transition: opacity 0.4s ease;
-  }
-  .avatar img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 25%;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-  .avatar img.loaded { opacity: 1; }
-  .sidebar h1 {
-    font-size: 28px;
-    font-weight: 500;
-    margin-bottom: 4px;
-    line-height: 1.1;
-  }
-  .sidebar h1 .accent { color: var(--accent); font-style: italic; font-weight: 500; }
-  .sidebar .role {
-    color: var(--ink-soft);
-    font-size: 14px;
-    margin-bottom: 4px;
-  }
-  .sidebar .email {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--ink-muted);
-    margin-bottom: 14px;
-    word-break: break-all;
-  }
-  .sidebar .email a { color: var(--ink-muted); border: none; }
-  .sidebar .email a:hover { color: var(--accent-ink); }
-  .actions {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .hero-text { min-width: 0; }
+  .hero h1 { font-size: 30px; margin-bottom: 4px; }
+  .hero h1 .accent { color: var(--accent); font-style: italic; }
+  .hero-role { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 8px; }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--ink-muted); margin-bottom: 14px; }
+  .hero-links a { color: var(--ink-muted); border: none; }
+  .hero-links a:hover { color: var(--accent-ink); }
+  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
   .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    background: var(--accent);
-    color: var(--bg-elev);
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    border: 1px solid var(--accent);
-    transition: all 0.15s;
+    display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px;
+    background: var(--accent); color: var(--bg-elev); border-radius: 8px; font-size: 13px; font-weight: 500;
+    border: 1px solid var(--accent); transition: all 0.15s;
   }
-  .btn:hover {
-    background: var(--accent-ink);
-    border-color: var(--accent-ink);
-    transform: translateY(-1px);
-  }
-  .btn.ghost {
-    background: transparent;
-    color: var(--accent-ink);
-  }
+  .btn:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+  .btn.ghost { background: transparent; color: var(--accent-ink); }
   .btn.ghost:hover { background: var(--accent-soft); }
-  .btn svg { width: 13px; height: 13px; }
-
-  .stat-row {
-    display: flex;
-    gap: 16px;
-    padding: 14px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 22px;
-    flex-wrap: wrap;
-  }
-  .stat .num {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--ink);
-    display: block;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-    transition: color 0.2s;
-  }
-  .stat .num.live { color: var(--accent-ink); }
-  .stat .num.live::after {
-    content: '•';
-    color: var(--accent);
-    font-size: 0.7em;
-    margin-left: 4px;
-    animation: pulse 1.6s ease-in-out infinite;
-    vertical-align: super;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
-  .stat .label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--ink-muted);
-    margin-top: 5px;
-    display: block;
+  .now-line { font-size: 12.5px; color: var(--ink-muted); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .now-line strong { color: var(--ink); font-weight: 600; }
+  .now-line a { color: var(--accent-ink); border-bottom: 1px solid var(--accent); font-weight: 600; }
+  @media (max-width: 520px) {
+    .hero { flex-direction: column; align-items: center; text-align: center; }
+    .hero-links, .hero-actions { justify-content: center; }
   }
 
-  /* SIDEBAR EXPERIENCE LIST */
-  .side-section { margin-bottom: 22px; }
-  .side-section .lbl {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--accent-ink);
-    margin-bottom: 10px;
-    font-weight: 500;
+  /* SECTIONS */
+  section.block { padding: 40px 0; border-top: 1px solid var(--line); }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--accent-ink); margin-bottom: 10px; font-weight: 600;
   }
-  .exp-card {
-    border-left: 2px solid var(--line);
-    padding: 6px 0 6px 14px;
-    margin-bottom: 14px;
-    transition: border-color 0.15s;
-  }
-  .exp-card:hover { border-left-color: var(--accent); }
-  .exp-card .where-line {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    column-gap: 8px;
-    row-gap: 1px;
-    margin-bottom: 2px;
-  }
-  .exp-card .where {
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--ink);
-    flex: 1 1 auto;
-  }
-  .exp-card .loc {
-    font-size: 11px;
-    color: var(--ink-muted);
-    white-space: nowrap;
-    flex: 0 0 auto;
-  }
-  .exp-card .date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    color: var(--ink-muted);
-    white-space: nowrap;
-    flex: 0 0 auto;
-  }
-  .exp-card .role-line {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    column-gap: 8px;
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    margin-bottom: 2px;
-  }
-  .exp-card .role-line .role { flex: 1 1 auto; }
-  .exp-card .mentor {
-    font-size: 11.5px;
-    color: var(--ink-muted);
-  }
-  .exp-card .mentor a { white-space: nowrap; }
+  section.block h2 { font-size: 22px; margin-bottom: 16px; }
 
-  /* See-more toggle for education */
-  .exp-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 4px;
-    margin-bottom: 12px;
-    padding: 4px 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--ink-muted);
-    letter-spacing: 0.05em;
-    transition: color 0.15s;
-  }
-  .exp-toggle:hover { color: var(--accent-ink); }
-  .exp-toggle .exp-toggle-icon {
-    display: inline-block;
-    font-size: 10px;
-    line-height: 1;
-    transition: transform 0.2s;
-  }
-  .exp-toggle[aria-expanded="true"] .exp-toggle-icon { transform: rotate(180deg); }
+  /* BIO */
+  .bio p { font-size: 15.5px; margin: 0 0 14px; text-align: justify; text-wrap: pretty; hyphens: auto; }
+  .bio p:last-child { margin-bottom: 0; }
+  .focus-list { margin: 18px 0 0; padding-left: 20px; }
+  .focus-list li { margin-bottom: 10px; font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+  .focus-list li strong { color: var(--ink); font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; }
+  .focus-list li::marker { color: var(--accent); }
 
-  /* Education cards (uni full-width, degree+date and advisor+grade on rows) */
-  .edu-list { margin-top: 2px; }
-  .edu-card .edu-uni {
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 4px;
-    line-height: 1.3;
-  }
-  .edu-card .edu-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 10px;
-    font-size: 12px;
-    color: var(--ink-soft);
-    margin-bottom: 2px;
-    line-height: 1.4;
-  }
-  .edu-card .edu-row .edu-degree { color: var(--ink-soft); }
-  .edu-card .edu-row a { white-space: nowrap; }
-  .edu-card .edu-row .date,
-  .edu-card .edu-row .grade {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    color: var(--ink-muted);
-    white-space: nowrap;
-  }
-  .edu-card .edu-foot {
-    font-size: 11.5px;
-    color: var(--ink-muted);
-    margin-top: 3px;
-    line-height: 1.45;
-  }
-  .edu-card .edu-foot-nowrap {
-    white-space: nowrap;
-    font-size: 11px;
-    letter-spacing: -0.01em;
-  }
-  @media (max-width: 400px) {
-    .edu-card .edu-foot-nowrap {
-      font-size: 10.5px;
-    }
-  }
+  /* TIMELINE (experience / education) */
+  .tl-row { padding: 14px 0; border-bottom: 1px dashed var(--line); }
+  .tl-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .tl-row:first-child { padding-top: 0; }
+  .tl-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+  .tl-where { font-weight: 600; font-size: 14.5px; color: var(--ink); }
+  .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-muted); white-space: nowrap; }
+  .tl-role { font-size: 13.5px; color: var(--ink-soft); margin-top: 1px; }
+  .tl-detail { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; line-height: 1.5; }
+  .tl-detail a { color: var(--ink-muted); }
+  .tl-detail a:hover { color: var(--accent-ink); }
 
-  .peer-intro {
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    margin-bottom: 12px;
-    line-height: 1.5;
+  /* PUBLICATIONS — plain list, no cards, no filters */
+  .pub-group-title {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--ink-muted); margin: 22px 0 10px; font-weight: 600;
   }
-  .peer-intro strong { color: var(--ink); font-weight: 600; }
-  .peer-cat { margin-bottom: 10px; }
-  .peer-cat .cat-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--ink-muted);
-    margin-bottom: 6px;
+  .pub-group-title:first-of-type { margin-top: 0; }
+  ol.pub-list { list-style: none; counter-reset: pub; margin: 0; padding: 0; }
+  .pub-row { counter-increment: pub; padding: 13px 0 13px 30px; position: relative; border-bottom: 1px solid var(--line); }
+  .pub-list:last-of-type .pub-row:last-child { border-bottom: none; }
+  .pub-row::before {
+    content: counter(pub) ".";
+    position: absolute; left: 0; top: 13px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-muted);
   }
-  .peer-pills { display: flex; flex-wrap: wrap; gap: 5px; }
-  .peer-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 3px 9px;
-    background: var(--pill-bg);
-    color: var(--pill-ink);
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 500;
-    border: 1px solid transparent;
-    transition: all 0.15s;
-  }
-  .peer-pill:hover { background: var(--accent-soft); color: var(--accent-ink); border-color: var(--accent); }
+  .pub-title { font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 3px; }
+  .pub-authors { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 3px; }
+  .pub-authors strong { color: var(--ink); font-weight: 600; }
+  .pub-meta { font-size: 12px; color: var(--ink-muted); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
+  .pub-status { font-weight: 600; }
+  .pub-status.published { color: var(--accent-ink); }
+  .pub-status.accepted { color: var(--accent-ink); }
+  .pub-status.review { color: var(--warn-ink); }
+  .pub-status.preprint { color: var(--ink-muted); font-style: italic; }
+  .pub-meta .sep { color: var(--line); }
+  .pub-meta a { font-weight: 500; }
 
-  .mentee-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .mentee-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px dashed var(--line);
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    line-height: 1.4;
-  }
-  .mentee-list li:last-child { border-bottom: none; }
-  .mentee-list strong,
-  .mentee-list .mentee-name {
-    color: var(--ink);
-    font-weight: 600;
-    font-size: 12.5px;
-    border: none;
-    transition: color 0.15s;
-  }
-  .mentee-list .mentee-name:hover {
-    color: var(--accent-ink);
-    border-bottom: 1px solid var(--accent);
-  }
-  .mentee-flag { font-size: 16px; line-height: 1; flex-shrink: 0; margin-top: 1px; }
-  .mentee-head {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .mentee-where { color: var(--ink-muted); font-size: 11.5px; margin-top: 2px; display: block; }
-  .mentee-dates {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    color: var(--accent-ink);
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-  }
-  .mentee-papers { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
-  .mentee-pub {
-    display: inline-block;
-    background: var(--pill-bg);
-    color: var(--pill-ink);
-    padding: 1px 7px;
-    border-radius: 4px;
-    font-size: 10.5px;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    border: none;
-    transition: all 0.15s;
-  }
-  .mentee-pub:hover { background: var(--accent); color: var(--bg-elev); border: none; }
+  /* SKILLS — plain categorized text, no card grid */
+  .skills-list { display: flex; flex-direction: column; gap: 10px; }
+  .skill-row { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+  .skill-row strong { color: var(--ink); font-family: 'Fraunces', serif; font-weight: 600; font-size: 14.5px; }
 
-  .now-box {
-    background: var(--accent-soft);
-    border: 1px solid var(--accent);
-    border-radius: 12px;
-    padding: 14px 16px;
-    font-size: 13px;
-    color: var(--accent-ink);
-    line-height: 1.5;
-  }
-  .now-box strong { color: var(--accent-ink); display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'JetBrains Mono', monospace; font-weight: 500; }
-  .now-box a { color: var(--accent-ink); font-weight: 600; border-bottom: 1px solid var(--accent); }
-
-  /* Upcoming Travel box */
-  .travel-box {
-    background: var(--accent-soft);
-    border: 1px solid var(--accent);
-    border-radius: 12px;
-    padding: 14px 16px;
-    font-size: 12.5px;
-    color: var(--ink);
-    line-height: 1.5;
-  }
-  .travel-title {
-    color: var(--accent-ink);
-    font-size: 13.5px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .travel-sub {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--accent-ink);
-    margin: 12px 0 6px;
-    opacity: 0.85;
-  }
-  .travel-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .travel-list li {
-    padding: 3px 0;
-    color: var(--ink);
-  }
-  .travel-list li strong { font-weight: 600; }
-  .travel-list .travel-when {
-    color: var(--ink-muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    white-space: nowrap;
-  }
-  .travel-list li em { color: var(--ink-muted); font-style: italic; font-size: 11px; }
-  .travel-empty { color: var(--ink-muted); font-style: italic; font-size: 12px; padding: 2px 0; }
-  .travel-cta {
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px dashed var(--accent);
-    font-size: 12px;
-    color: var(--accent-ink);
-  }
-  .travel-cta a { color: var(--accent-ink); font-weight: 600; border-bottom: 1px solid var(--accent); }
-
-  /* MAIN CONTENT */
-  .content section { padding: 0 0 44px; }
-  .content section + section { border-top: 1px solid var(--line); padding-top: 36px; }
-  .content .first-section { padding-top: 0; }
-  .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--accent-ink);
-    margin-bottom: 14px;
-    font-weight: 500;
-  }
-  .content h2 { font-size: 24px; margin-bottom: 18px; }
-  .bio p {
-    font-size: 16px;
-    color: var(--ink);
-    margin: 0 0 14px;
-    line-height: 1.65;
-  }
-  .bio p strong { font-weight: 600; }
-  .bio .lead {
-    font-size: 17px;
-    text-align: justify;
-    text-wrap: pretty;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-  }
-
-  .research-list {
-    margin: 16px 0 8px;
-    padding-left: 22px;
-    counter-reset: research;
-  }
-  .research-list > li {
-    margin-bottom: 14px;
-    padding-left: 4px;
-    list-style: none;
-    position: relative;
-    counter-increment: research;
-  }
-  .research-list > li::before {
-    content: counter(research) ".";
-    position: absolute;
-    left: -22px;
-    top: 0;
-    font-family: 'Fraunces', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--accent);
-    font-style: italic;
-  }
-  .research-list > li > strong {
-    font-family: 'Inter', sans-serif;
-    font-size: 15.5px;
-    font-weight: 600;
-    color: var(--ink);
-    display: block;
-    margin-bottom: 4px;
-  }
-  .research-list ul {
-    margin: 4px 0 0;
-    padding-left: 18px;
-    color: var(--ink-soft);
-    font-size: 14.5px;
-  }
-  .research-list ul li { margin-bottom: 3px; line-height: 1.5; }
-  .research-list ul li::marker { color: var(--ink-muted); }
-  .research-list .tag {
-    display: inline-block;
-    background: var(--pill-bg);
-    color: var(--pill-ink);
-    padding: 1px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    margin-left: 4px;
-    border: none;
-  }
-  .research-list .tag:hover { background: var(--accent); color: var(--bg-elev); }
-
-  .callout {
-    background: var(--hot-bg);
-    border: 1px solid var(--hot-border);
-    border-left: 3px solid var(--hot-border);
-    border-radius: 10px;
-    padding: 12px 16px;
-    margin: 22px 0 8px;
-    font-size: 13.5px;
-    color: var(--hot-ink);
-    line-height: 1.5;
-    box-shadow: 0 4px 12px rgba(232, 90, 79, 0.10);
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    position: relative;
-    overflow: hidden;
-  }
-  .callout::before {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 90px; height: 90px;
-    background: radial-gradient(circle, var(--hot-border) 0%, transparent 70%);
-    opacity: 0.15;
-    pointer-events: none;
-  }
-  .callout .ico {
-    font-size: 18px;
-    line-height: 1;
-    flex-shrink: 0;
-    animation: nudge 2.6s ease-in-out infinite;
-  }
-  @keyframes nudge {
-    0%, 60%, 100% { transform: rotate(0deg); }
-    70% { transform: rotate(-12deg); }
-    80% { transform: rotate(10deg); }
-    90% { transform: rotate(-6deg); }
-  }
-  .callout strong { color: var(--hot-ink); font-weight: 700; }
-  .callout a {
-    color: var(--hot-ink);
-    font-weight: 700;
-    border-bottom: 1.5px solid var(--hot-border);
-  }
-  .callout a:hover { background: var(--hot-border); color: #fff; border-bottom-color: var(--hot-border); padding: 0 4px; border-radius: 4px; }
-
+  /* NEWS */
   .news-list { display: flex; flex-direction: column; gap: 10px; }
-  .news-item {
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 14px;
-    align-items: baseline;
-    font-size: 14px;
-    color: var(--ink-soft);
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--line);
-  }
-  .news-item:last-child { border-bottom: none; }
-  .news-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    color: var(--accent-ink);
-  }
+  .news-item { display: grid; grid-template-columns: 82px 1fr; gap: 12px; font-size: 13.5px; color: var(--ink-soft); padding-bottom: 10px; border-bottom: 1px dashed var(--line); }
+  .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .news-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-ink); }
   .news-item strong { color: var(--ink); font-weight: 600; }
 
-  /* FULL-WIDTH SECTIONS BELOW */
-  .full-section {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 56px 28px 24px;
-    border-top: 1px solid var(--line);
-  }
-  .full-section h2 { font-size: 28px; margin-bottom: 22px; }
+  /* SERVICE */
+  .service-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .service-list li { font-size: 13.5px; color: var(--ink-soft); padding-left: 16px; position: relative; }
+  .service-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
 
-  /* PUBLICATIONS */
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
-  .filter-btn {
-    padding: 6px 14px;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--ink-soft);
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.15s;
-  }
-  .filter-btn:hover { color: var(--accent-ink); border-color: var(--accent); }
-  .filter-btn.active {
-    background: var(--accent);
-    color: var(--bg-elev);
-    border-color: var(--accent);
-  }
-  .pubs { display: flex; flex-direction: column; }
-  .pub { padding: 16px 0; border-bottom: 1px solid var(--line); }
-  .pub:last-child { border-bottom: none; }
-  .pub.hidden { display: none; }
-  .pub-venue {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--accent-ink);
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
-  .pub h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 15.5px;
-    font-weight: 600;
-    margin-bottom: 4px;
-    line-height: 1.4;
-  }
-  .pub .authors { color: var(--ink-soft); font-size: 13.5px; margin-bottom: 8px; }
-  .pub .authors .me { color: var(--ink); font-weight: 600; }
-  .pub-links { display: flex; gap: 6px; flex-wrap: wrap; }
-  .pub-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 3px 10px;
-    background: var(--pill-bg);
-    color: var(--pill-ink);
-    border-radius: 6px;
-    font-size: 11.5px;
-    font-weight: 500;
-    border: none;
-    transition: all 0.15s;
-  }
-  .pub-pill:hover { background: var(--accent); color: var(--bg-elev); }
+  footer { padding: 40px 24px 64px; text-align: center; color: var(--ink-muted); font-size: 12.5px; border-top: 1px solid var(--line); margin-top: 8px; }
+  footer .foot-links { margin-top: 8px; display: flex; gap: 12px; justify-content: center; }
+  footer .foot-links a { color: var(--ink-muted); border: none; }
+  footer .foot-links a:hover { color: var(--accent-ink); }
 
-  /* FEATURED PUBLICATIONS (card layout) */
-  .pubs-sub { color: var(--ink-soft); font-size: 14px; margin: 4px 0 22px; }
-  .pubs-sub a { color: var(--accent-ink); border-bottom: 1px solid var(--accent); font-weight: 600; }
-  .pubs-group-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--accent-ink);
-    font-weight: 600;
-    margin: 22px 0 12px;
-  }
-  .pubs-group-label:first-of-type { margin-top: 0; }
-  .pubs-group-label.hidden-group { display: none; }
-  .pubs-cards { display: flex; flex-direction: column; gap: 16px; }
-  .pub-card {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 18px;
-    padding: 12px 14px;
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    align-items: stretch;
-  }
-  .pub-card:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow); }
-  .pub-card.hidden { display: none; }
-  @media (max-width: 720px) {
-    .pub-card { grid-template-columns: 1fr; }
-    .pub-thumb { height: 110px; }
-  }
-
-  .pub-thumb {
-    position: relative;
-    min-height: 120px;
-    height: 100%;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    color: white;
-    font-family: 'Fraunces', serif;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-align: center;
-    padding: 8px;
-  }
-  .pub-thumb.t-bio   { background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%); }
-  .pub-thumb.t-rl    { background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%); }
-  .pub-thumb.t-nature{ background: linear-gradient(135deg, #2C5282 0%, #1A365D 100%); }
-  .pub-thumb.t-trust { background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%); }
-  .pub-thumb.t-nlp   { background: linear-gradient(135deg, #EF6C00 0%, #E65100 100%); }
-  .pub-thumb.t-bio2  { background: linear-gradient(135deg, #00838F 0%, #006064 100%); }
-
-  .pub-status {
-    position: absolute;
-    top: 8px; left: 8px;
-    background: rgba(255,255,255,0.92);
-    color: var(--ink);
-    padding: 3px 9px;
-    border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-  .pub-status.s-pub  { color: #1B5E20; }
-  .pub-status.s-pre  { color: #E65100; }
-  .pub-status.s-sub  { color: #C62828; }
-  .pub-status.s-rev {
-    color: #8a5a00;
-    background: rgba(255, 248, 220, 0.96);
-    animation: revHalo 2.2s ease-in-out infinite;
-  }
-  .pub-status.s-rev::after {
-    content: '•';
-    color: #c77100;
-    margin-left: 5px;
-    font-size: 1.05em;
-    line-height: 0;
-    vertical-align: middle;
-    animation: pulse 1.6s ease-in-out infinite;
-  }
-  @keyframes revHalo {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(199, 113, 0, 0.55); }
-    50%      { box-shadow: 0 0 0 7px rgba(199, 113, 0, 0); }
-  }
-  [data-theme="dark"] .pub-status.s-rev {
-    color: #ffd07a;
-    background: rgba(60, 40, 10, 0.95);
-  }
-  [data-theme="dark"] .pub-status.s-rev::after { color: #ffb547; }
-  @media (prefers-reduced-motion: reduce) {
-    .pub-status.s-rev,
-    .pub-status.s-rev::after { animation: none; }
-  }
-
-  /* Live venue-line shimmer (for in-review papers) */
-  .pub-venue-line.live-venue {
-    background-image: linear-gradient(
-      90deg,
-      #C62828 0%,
-      #C62828 38%,
-      #ed8836 50%,
-      #C62828 62%,
-      #C62828 100%
-    );
-    background-size: 220% 100%;
-    background-repeat: no-repeat;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    animation: venueShine 4.8s linear infinite;
-  }
-  @keyframes venueShine {
-    0%   { background-position: 220% 0; }
-    100% { background-position: -120% 0; }
-  }
-  [data-theme="dark"] .pub-venue-line.live-venue {
-    background-image: linear-gradient(
-      90deg,
-      #ff8a7a 0%,
-      #ff8a7a 38%,
-      #ffd07a 50%,
-      #ff8a7a 62%,
-      #ff8a7a 100%
-    );
-    background-size: 220% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .pub-venue-line.live-venue {
-      animation: none;
-      -webkit-text-fill-color: #C62828;
-      color: #C62828;
-    }
-    [data-theme="dark"] .pub-venue-line.live-venue {
-      -webkit-text-fill-color: #ff8a7a;
-      color: #ff8a7a;
-    }
-  }
-
-  .pub-info { display: flex; flex-direction: column; min-width: 0; }
-  .pub-info h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 1.35;
-    margin: 0 0 6px;
-    color: var(--ink);
-  }
-  .pub-info .pub-authors { color: var(--ink-soft); font-size: 13.5px; margin-bottom: 4px; line-height: 1.5; }
-  .pub-info .pub-authors strong { color: var(--ink); font-weight: 600; }
-  .pub-info .pub-venue-line {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 14px;
-    color: #C62828;
-    margin: 2px 0 6px;
-    letter-spacing: 0;
-    text-transform: none;
-  }
-  .pub-info .pub-desc { font-size: 13px; color: var(--ink-muted); margin: 0 0 8px; line-height: 1.5; }
-  .pub-info .pub-links { margin-top: auto; padding-top: 4px; }
-
-  /* SKILLS */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  @media (max-width: 720px) { .skills-grid { grid-template-columns: 1fr; } }
-  .skill-card {
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 18px 18px 16px;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-  }
-  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
-  .skill-card .skill-icon {
-    font-size: 24px;
-    line-height: 1;
-    margin-bottom: 10px;
-    display: block;
-  }
-  .skill-card h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 14.5px;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 12px;
-    line-height: 1.3;
-  }
-  .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-  .skill-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    background: var(--pill-bg);
-    color: var(--pill-ink);
-    border-radius: 6px;
-    font-size: 11.5px;
-    font-weight: 500;
-    border: none;
-    transition: all 0.15s;
-  }
-  .skill-pill:hover { background: var(--accent); color: var(--bg-elev); }
-
-  /* AWARDS */
-  .awards { display: flex; flex-direction: column; gap: 12px; }
-  .award {
-    display: grid;
-    grid-template-columns: 70px 1fr;
-    gap: 18px;
-    align-items: baseline;
-    font-size: 14.5px;
-    color: var(--ink-soft);
-  }
-  .award-year { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-ink); }
-  .award strong { color: var(--ink); font-weight: 600; }
-
-  /* PROJECT CARDS (animated icon + content) */
-  .proj-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  @media (max-width: 720px) { .proj-grid { grid-template-columns: 1fr; } }
-  .proj-card {
-    display: grid;
-    grid-template-columns: 88px 1fr;
-    gap: 16px;
-    align-items: start;
-    padding: 14px 16px;
-    background: var(--bg-elev);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-  }
-  .proj-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
-  .proj-icon {
-    width: 88px;
-    height: 88px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 44px;
-    line-height: 1;
-    overflow: hidden;
-  }
-  .proj-icon.p-safe  { background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); }
-  .proj-icon.p-brain { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); }
-  .proj-icon.p-radar { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); }
-  .proj-icon.p-pill  { background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%); }
-  .proj-emoji { display: inline-block; transform-origin: center; }
-  .proj-content { min-width: 0; }
-  .proj-year {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    color: var(--accent-ink);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .proj-content h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 15.5px;
-    font-weight: 600;
-    color: var(--ink);
-    margin: 0 0 4px;
-    line-height: 1.3;
-  }
-  .proj-content p {
-    font-size: 13px;
-    color: var(--ink-soft);
-    line-height: 1.5;
-    margin: 0;
-  }
-  .proj-content p a {
-    color: var(--accent-ink);
-    border-bottom: 1px solid var(--accent);
-    font-weight: 600;
-  }
-
-  /* Project icon animations */
-  @keyframes pBob   { 0%,100% { transform: translateY(0) }     50% { transform: translateY(-5px) } }
-  @keyframes pPulse { 0%,100% { transform: scale(1) }          50% { transform: scale(1.1) } }
-  @keyframes pSway  { 0%,100% { transform: rotate(-6deg) }     50% { transform: rotate(6deg) } }
-  @keyframes pSpin  { 0% { transform: rotate(0deg) }           100% { transform: rotate(360deg) } }
-  @media (prefers-reduced-motion: reduce) {
-    .proj-emoji { animation: none !important; }
-  }
-
-  footer {
-    padding: 56px 28px 80px;
-    text-align: center;
-    color: var(--ink-muted);
-    font-size: 13px;
-    border-top: 1px solid var(--line);
-    margin-top: 48px;
-  }
-
-  /* SCROLL REVEAL */
-  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
-
-  /* BG TEXTURE */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    pointer-events: none; z-index: 0;
-    background-image: radial-gradient(circle at 1px 1px, var(--ink) 0.5px, transparent 0);
-    background-size: 24px 24px; opacity: 0.015;
-  }
-  main { position: relative; z-index: 1; }
-
-  /* === MOBILE RESPONSIVE === */
-  @media (max-width: 860px) {
-    .wrap { padding: 24px 18px 0; max-width: 100%; }
-    .layout { gap: 28px; grid-template-columns: 1fr; }
-    .sidebar { border-right: none; padding-right: 0; }
-    .avatar { width: 120px; height: 120px; }
-    .stat-row { gap: 14px 22px; flex-wrap: wrap; padding: 12px 0; }
-    .pub-thumb { padding: 22px 18px; font-size: 14px; }
-  }
-  @media (max-width: 600px) {
-    body { font-size: 14.5px; }
-    .hero h1 { font-size: clamp(32px, 8vw, 42px); }
-    h2 { font-size: 22px !important; }
-    .content h2 { font-size: 22px; margin-bottom: 14px; }
-    .avatar { width: 104px; height: 104px; border-width: 2px; }
-    .sidebar h1 { font-size: 24px; }
-    .stat-row { gap: 12px 18px; }
-    .stat .num { font-size: 16px; }
-    .stat .label { font-size: 9px; }
-    .actions { gap: 6px; }
-    .btn { padding: 6px 12px; font-size: 12.5px; }
-    .news-item, .award {
-      grid-template-columns: 1fr;
-      gap: 2px;
-      padding-bottom: 12px;
-    }
-    .news-date, .award-year { font-size: 11px; }
-    .callout { padding: 12px 14px; font-size: 13px; gap: 10px; }
-    .callout .ico { font-size: 18px; }
-    .filters { gap: 6px; }
-    .filter-btn { padding: 5px 10px; font-size: 12px; }
-    .pub-card { grid-template-columns: 1fr !important; }
-    .pub-thumb { min-height: 90px; padding: 18px 14px; }
-    .pub-links { gap: 4px; }
-    .pub-pill { font-size: 11px; padding: 3px 8px; }
-    .research-list { padding-left: 18px; }
-    .research-list > li::before { left: -18px; font-size: 14px; }
-    .research-list > li > strong { font-size: 14.5px; }
-    .research-list ul { font-size: 13.5px; }
-    .exp-card .where { font-size: 13px; }
-    .exp-card .role-line { font-size: 12px; }
-    .exp-card .mentor { font-size: 11px; }
-    footer { padding: 32px 18px 50px; font-size: 12px; }
-  }
-  @media (max-width: 400px) {
-    .wrap { padding: 18px 14px 0; }
-    .nav-brand { font-size: 14px; }
-    .hero h1 { font-size: 28px; }
-    .avatar { width: 92px; height: 92px; }
-    .actions { flex-direction: column; align-items: stretch; }
-    .btn { width: 100%; justify-content: center; }
-  }
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-left">
-      <div class="nav-icons">
-        <a href="mailto:Ornitasfia3@gmail.com" title="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
-        <a href="https://scholar.google.com/citations?user=ToPoa3EAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
-        </a>
-        <a href="https://orcid.org/0000-0002-2730-1191" target="_blank" rel="noopener" title="ORCID">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947 0 .525-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.516.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
-        </a>
-        <a href="https://github.com/Tasfia266" target="_blank" rel="noopener" title="GitHub">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/tasfia-nuzhat" target="_blank" rel="noopener" title="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-        </a>
-      </div>
-    </div>
+    <a href="#top" class="nav-brand">Tasfia<span class="dot">.</span></a>
     <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
-      <a href="cv/Tasfia_CV.pdf" target="_blank">CV</a>
       <a href="#publications">Publications</a>
       <a href="#skills">Skills</a>
       <a href="#news">News</a>
-      <a href="#projects">Projects</a>
+      <a href="#service">Service</a>
+      <a href="cv/Tasfia_CV.pdf" target="_blank">CV</a>
       <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1307,673 +242,215 @@
 </nav>
 
 <main>
+<div class="page" id="top">
 
-<div class="wrap">
-  <div class="layout">
-
-    <!-- LEFT SIDEBAR -->
-    <aside class="sidebar">
-      <div class="avatar">
-        <img id="avatarImg" src="assets/photos/photo1.jpg" alt="Tasfia Nuzhat" class="loaded" style="object-position: center 30%;" />
-      </div>
+  <header class="hero">
+    <div class="hero-photo"><img src="assets/photos/photo1.jpg" alt="Tasfia Nuzhat" /></div>
+    <div class="hero-text">
       <h1>Tasfia <span class="accent">Nuzhat</span></h1>
-      <div class="role">PhD Researcher · UCF</div>
-      <div class="email"><a href="mailto:Ornitasfia3@gmail.com">Ornitasfia3@gmail.com</a></div>
-      <div class="actions">
-        <a class="btn" href="cv/Tasfia_CV.pdf" target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          CV
-        </a>
-        <a class="btn ghost" href="https://scholar.google.com/citations?user=ToPoa3EAAAAJ&hl=en" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
-          Scholar
-        </a>
+      <div class="hero-role">Ph.D. Researcher, Industrial Engineering &amp; Management Systems · University of Central Florida</div>
+      <div class="hero-links">
+        <a href="mailto:Ornitasfia3@gmail.com">Ornitasfia3@gmail.com</a>
+        <a href="https://scholar.google.com/citations?user=ToPoa3EAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://orcid.org/0000-0002-2730-1191" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://github.com/Tasfia266" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/tasfia-nuzhat" target="_blank" rel="noopener">LinkedIn</a>
       </div>
-      <div class="stat-row">
-        <div class="stat"><span class="num" data-target="36" data-suffix="" data-metric="cites">0</span><span class="label">Cites</span></div>
-        <div class="stat"><span class="num" data-target="3" data-suffix="" data-metric="hindex">0</span><span class="label">h-index</span></div>
-        <div class="stat"><span class="num" data-target="7" data-suffix="" data-metric="pubs">0</span><span class="label">Pubs</span></div>
+      <div class="hero-actions">
+        <a class="btn" href="cv/Tasfia_CV.pdf" target="_blank">Download CV</a>
+        <a class="btn ghost" href="mailto:Ornitasfia3@gmail.com">Get in touch</a>
       </div>
-
-      <div class="side-section">
-        <div class="lbl">Experience</div>
-
-        <div class="exp-card">
-          <div class="where-line">
-            <span class="where"><a href="https://complexity.cecs.ucf.edu/" target="_blank" rel="noopener" style="color: inherit; border: none;">UCF · CASL Lab</a></span>
-            <span class="loc">&#128205; Orlando, FL</span>
-          </div>
-          <div class="role-line">
-            <span class="role">Graduate Research Assistant</span>
-            <span class="date">Jan 2026 &ndash; Now</span>
-          </div>
-          <div class="mentor">
-            Focus: Generative Diffusion &middot; Trustworthy AI<br/>
-            Advisor: <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a>
-          </div>
-        </div>
-
-        <div class="exp-card">
-          <div class="where-line">
-            <span class="where">UCF · Dept. of IEMS</span>
-            <span class="loc">&#128205; Orlando, FL</span>
-          </div>
-          <div class="role-line">
-            <span class="role">Graduate Teaching Assistant</span>
-            <span class="date">Jan 2026 &ndash; Now</span>
-          </div>
-          <div class="mentor">
-            STA3032 Probability &amp; Statistics (Spring &amp; Fall 2026) &middot; grading, office hours
-          </div>
-        </div>
-
-        <div class="exp-card">
-          <div class="where-line">
-            <span class="where">Delineate Inc.</span>
-            <span class="loc">&#128205; Boston, MA · Remote</span>
-          </div>
-          <div class="role-line">
-            <span class="role">AI Engineer</span>
-            <span class="date">Nov 2023 &ndash; Dec 2025</span>
-          </div>
-          <div class="mentor">
-            Focus: LLMs &middot; RAG for biomedical literature
-          </div>
-        </div>
-
-        <button type="button" class="exp-toggle" id="eduToggle" aria-expanded="false" aria-controls="eduList">
-          <span class="exp-toggle-text">See more</span>
-          <span class="exp-toggle-icon">&#9662;</span>
-        </button>
-
-        <div class="edu-list" id="eduList" hidden>
-          <div class="exp-card">
-            <div class="where-line">
-              <span class="where">Universiti Tenaga Nasional</span>
-              <span class="loc">&#128205; Malaysia</span>
-            </div>
-            <div class="role-line">
-              <span class="role">Graduate Research Assistant</span>
-              <span class="date">Dec 2024 &ndash; Dec 2025</span>
-            </div>
-            <div class="mentor">
-              Focus: Machine Learning for Nanomaterials
-            </div>
-          </div>
-
-          <div class="exp-card edu-card">
-            <div class="edu-uni">University of Central Florida</div>
-            <div class="edu-row">
-              <span class="edu-degree">PhD in IEMS</span>
-              <span class="date">Jan 2026 &ndash; Present</span>
-            </div>
-            <div class="edu-row">
-              <span>Advisor: <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a></span>
-            </div>
-            <div class="edu-row">
-              <span>CGPA: 4.00 / 4.00</span>
-            </div>
-            <div class="edu-foot edu-foot-nowrap">Focus: Generative Diffusion Models &middot; LLMs</div>
-          </div>
-
-          <div class="exp-card edu-card">
-            <div class="edu-uni">Chittagong Independent University</div>
-            <div class="edu-row">
-              <span class="edu-degree">B.Sc in CSE</span>
-              <span class="date">Sep 2017 &ndash; Sep 2021</span>
-            </div>
-            <div class="edu-row">
-              <span>Chittagong, Bangladesh</span>
-            </div>
-          </div>
-        </div>
+      <div class="now-line" id="statsLine">
+        Orlando, FL &middot; <span id="citeStat">36 citations, h-index 3</span> (Google Scholar) &middot; Traveling to <strong>MoML 2026</strong>, Boston.
       </div>
+    </div>
+  </header>
 
-      <div class="side-section">
-        <div class="travel-box">
-          <div class="travel-title">Upcoming Travel</div>
-          <ul class="travel-list">
-            <li>&#9989; <strong>MoML 2026</strong> in Boston, MA</li>
-          </ul>
-          <div class="travel-cta">
-            &#128075; Open to collaborate. <a href="mailto:Ornitasfia3@gmail.com">Email me</a> to connect.
-          </div>
-        </div>
-      </div>
+  <section class="block reveal" id="about">
+    <div class="eyebrow">About</div>
+    <h2>Research</h2>
+    <div class="bio">
+      <p>I am a Ph.D. researcher in Industrial Engineering &amp; Management Systems at the University of Central Florida's <strong>Complex Adaptive Systems Lab</strong>, advised by <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a>. I'm currently working on <strong>multi-objective optimization for generative diffusion models</strong>, focused on constrained molecule generation, where I study how to balance competing objectives &mdash; validity, novelty, and structural risk &mdash; during sampling. I'm also expanding my research into <strong>AI safety, reasoning, and alignment</strong> for tool-using LLM agents, building on my work on NEXUS, a runtime safety layer that monitors and intervenes on agent behavior before unsafe actions execute. More broadly, I'm interested in trustworthy and biomedical AI: resolving outdated parametric knowledge in language models and building uncertainty-aware systems for clinical decision support. Before my Ph.D. I spent two years as an AI engineer building LLM and retrieval systems over pharmaceutical literature.</p>
+    </div>
+    <ol class="focus-list">
+      <li><strong>Multi-Objective Optimization &amp; Generative Diffusion</strong><br/>Constrained molecule generation with motif-aware tokenization and role-aware corruption (MoCDiff, MotifRole-Diff).</li>
+      <li><strong>AI Safety, Reasoning &amp; Alignment</strong><br/>Runtime monitoring and intervention for tool-using LLM agents; safety under multi-agent composition (NEXUS, ChannelGuard, CAREBENCH).</li>
+      <li><strong>Trustworthy &amp; Biomedical AI</strong><br/>Temporal-conflict resolution and uncertainty-aware clinical decision support (Parametric Temporal Conflict, MedBayes-Lite, R-GAT).</li>
+    </ol>
+  </section>
 
-      <div class="side-section">
-        <div class="lbl">Peer Review</div>
-        <div class="peer-intro">Reviewer for generative-AI research in biology; evaluating rigor, novelty, and reproducibility.</div>
-        <div class="peer-cat">
-          <div class="cat-label">Workshops</div>
-          <div class="peer-pills">
-            <span class="peer-pill">ICML GenBio 2026</span>
-            <span class="peer-pill">NeurIPS WiML 2026</span>
-          </div>
-        </div>
-      </div>
+  <section class="block reveal" id="experience">
+    <div class="eyebrow">Experience</div>
+    <h2>Experience &amp; Education</h2>
 
-    </aside>
+    <div class="tl-row">
+      <div class="tl-head"><span class="tl-where">UCF · Complex Adaptive Systems Lab</span><span class="tl-date">Jan 2026 &ndash; Now</span></div>
+      <div class="tl-role">Graduate Research Assistant &middot; Orlando, FL</div>
+      <div class="tl-detail">Generative diffusion &amp; multi-objective optimization; AI safety, reasoning &amp; alignment. Advisor: <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-head"><span class="tl-where">UCF · Dept. of IEMS</span><span class="tl-date">Jan 2026 &ndash; Now</span></div>
+      <div class="tl-role">Graduate Teaching Assistant &middot; Orlando, FL</div>
+      <div class="tl-detail">STA3032 Probability &amp; Statistics (Spring &amp; Fall 2026) &middot; grading, office hours</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-head"><span class="tl-where">Delineate Inc.</span><span class="tl-date">Nov 2023 &ndash; Dec 2025</span></div>
+      <div class="tl-role">AI Engineer (Remote) &middot; Boston, MA</div>
+      <div class="tl-detail">LLM-powered retrieval &amp; extraction over pharmaceutical literature; RAG, computer-vision figure digitization, explainable clinical risk modeling</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-head"><span class="tl-where">Universiti Tenaga Nasional</span><span class="tl-date">Dec 2024 &ndash; Dec 2025</span></div>
+      <div class="tl-role">Graduate Research Assistant &middot; Malaysia</div>
+      <div class="tl-detail">Predictive ML for material-property analysis &amp; nanomaterials; led a Q1 journal review</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-head"><span class="tl-where">University of Central Florida</span><span class="tl-date">Jan 2026 &ndash; Present</span></div>
+      <div class="tl-role">Ph.D., Industrial Engineering &amp; Management Systems &middot; CGPA 4.00/4.00</div>
+      <div class="tl-detail">Advisor: <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-head"><span class="tl-where">Chittagong Independent University</span><span class="tl-date">Sep 2017 &ndash; Sep 2021</span></div>
+      <div class="tl-role">B.Sc., Computer Science &amp; Engineering &middot; Chittagong, Bangladesh</div>
+    </div>
+  </section>
 
-    <!-- RIGHT MAIN CONTENT -->
-    <article class="content">
+  <section class="block reveal" id="publications">
+    <div class="eyebrow">Publications</div>
+    <h2>Publications</h2>
+    <p style="font-size:13.5px; color:var(--ink-soft); margin:-4px 0 4px;">Full list on <a href="https://scholar.google.com/citations?user=ToPoa3EAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
 
-      <section class="first-section bio" id="about">
-        <p class="lead">
-          I am a <strong>Ph.D. researcher in IEMS</strong> at the University of Central Florida's <strong>Complex Adaptive Systems Lab</strong>, advised by <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a>. My research centers on <strong>large language models and agentic AI</strong>, with a focus on making them safe and reliable. I study how to monitor tool-using agents and intervene on unsafe actions at runtime, why individually safe models can still fail when composed into multi-agent systems, and how to resolve outdated parametric memory in language models at test time. I also work on <strong>generative diffusion for scientific applications</strong>, where I build constraint-aware models for molecule generation, and on <strong>uncertainty-aware biomedical AI</strong>. Before my PhD I spent two years as an AI engineer building LLM and retrieval systems over pharmaceutical literature.
-        </p>
+    <div class="pub-group-title">First-Author</div>
+    <ol class="pub-list">
+      <li class="pub-row">
+        <div class="pub-title">MoCDiff: Efficient Motif-Constrained Discrete Diffusion for Molecule Generation</div>
+        <div class="pub-authors"><strong>T. Nuzhat</strong>, M. J. I. Basher, S. K. Mishra, O. Garibay, I. Garibay, N. Yousefi</div>
+        <div class="pub-meta"><span class="pub-status accepted">Accepted</span><span class="sep">&middot;</span>ICML 2026 Workshop on Generative &amp; Agentic AI for Biology (GenBio)<span class="sep">&middot;</span><a href="https://openreview.net/forum?id=9WTCGrwEUh" target="_blank" rel="noopener">OpenReview</a></div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">MotifRole-Diff: Risk-Optimal Role-Aware Corruption for Masked Molecular Graph Diffusion</div>
+        <div class="pub-authors"><strong>T. Nuzhat</strong>, E. Hossain, I. Garibay, N. Yousefi</div>
+        <div class="pub-meta"><span class="pub-status review">Under review</span><span class="sep">&middot;</span>AAAI 2027</div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">A Review on Machine Learning in Photocatalytic Degradation of Organic Dyes from Wastewater: Current Trends and Future Directions</div>
+        <div class="pub-authors"><strong>T. Nuzhat</strong>, N. A. B. Mohamed Radzi, M. Maruthupandy, S. Yussof</div>
+        <div class="pub-meta"><span class="pub-status published">Published</span><span class="sep">&middot;</span>Journal of Water Process Engineering, 78:108760, 2025 (Elsevier, Q1, IF 6.7)<span class="sep">&middot;</span><a href="https://doi.org/10.1016/j.jwpe.2025.108760" target="_blank" rel="noopener">DOI</a></div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">A Multi-Scale Hyper Representation Network for Semantic Segmentation of Pulmonary Circulation Vessels in Pathology Assessment</div>
+        <div class="pub-authors"><strong>T. Nuzhat</strong>, S. Mohanto, A. Iqbal</div>
+        <div class="pub-meta"><span class="pub-status published">Published</span><span class="sep">&middot;</span>IEEE-EMBS IECBES 2024, Malaysia<span class="sep">&middot;</span><a href="https://ieeexplore.ieee.org/document/10991089/" target="_blank" rel="noopener">IEEE Xplore</a></div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">Artificial Magnetic Conductor Unit Cell Design Using Machine Learning Algorithms</div>
+        <div class="pub-authors"><strong>T. Nuzhat</strong>, M. N. Hasan</div>
+        <div class="pub-meta"><span class="pub-status published">Published</span><span class="sep">&middot;</span>IEEE IEMTRONICS 2022, Toronto, Canada<span class="sep">&middot;</span><a href="https://ieeexplore.ieee.org/document/9795851/" target="_blank" rel="noopener">IEEE Xplore</a></div>
+      </li>
+    </ol>
 
-        <ol class="research-list">
-          <li>
-            <strong>Agentic AI Safety</strong>
-            <ul>
-              <li>Structured runtime safety and intervention for tool-using LLM agents <a class="tag" href="#publications">NEXUS</a></li>
-              <li>Why safe models do not compose into safe multi-agent systems <a class="tag" href="#publications">ChannelGuard</a></li>
-              <li>Diagnostic reasoning safety benchmark for clinical LLM agents <a class="tag" href="#publications">CAREBENCH</a></li>
-            </ul>
-          </li>
-          <li>
-            <strong>Reliable &amp; Trustworthy LLMs</strong>
-            <ul>
-              <li>Test-time characterization of parametric temporal conflict <a class="tag" href="https://arxiv.org/abs/2606.20959" target="_blank">Temporal Conflict</a></li>
-              <li>Clinical uncertainty governance for risk-aware decision support <a class="tag" href="https://arxiv.org/abs/2511.16625" target="_blank">MedBayes-Lite</a></li>
-              <li>Parameter-efficient fine-tuning for language and vision models <a class="tag" href="https://arxiv.org/abs/2504.14117" target="_blank">PEFT A2Z</a></li>
-            </ul>
-          </li>
-          <li>
-            <strong>Generative Diffusion for Science</strong>
-            <ul>
-              <li>Motif-constrained discrete diffusion with a motif-aware graph-to-sequence tokenizer <a class="tag" href="https://openreview.net/forum?id=9WTCGrwEUh" target="_blank">MoCDiff</a></li>
-              <li>Risk-optimal role-aware corruption for masked molecular graph diffusion <a class="tag" href="#publications">MotifRole-Diff</a></li>
-            </ul>
-          </li>
-        </ol>
+    <div class="pub-group-title">Co-Authored</div>
+    <ol class="pub-list">
+      <li class="pub-row">
+        <div class="pub-title">Right Knowledge, Wrong Answer: Characterizing Parametric Temporal Conflict in Open-Weight Language Models</div>
+        <div class="pub-authors">E. Hossain, S. Saha, <strong>T. Nuzhat</strong>, S. S. Jennifer, U. Biswas, S. R. Dipta, R. Rana, N. Yousefi</div>
+        <div class="pub-meta"><span class="pub-status review">Under review</span><span class="sep">&middot;</span>AAAI 2027<span class="sep">&middot;</span><a href="https://arxiv.org/abs/2606.20959" target="_blank" rel="noopener">arXiv</a></div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">NEXUS: Structured Runtime Safety for Tool-Using LLM Agents</div>
+        <div class="pub-authors">E. Hossain, M. M. H. Nipu, <strong>T. Nuzhat</strong>, R. Rana, N. Yousefi</div>
+        <div class="pub-meta"><span class="pub-status accepted">Accepted</span><span class="sep">&middot;</span>AACL-IJCNLP 2026</div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">ChannelGuard: Safe Models Do Not Compose into Safe Multi-Agent Systems</div>
+        <div class="pub-authors">E. Hossain, M. M. H. Nipu, F. T. J. Faria, <strong>T. Nuzhat</strong>, M. Sheikh</div>
+        <div class="pub-meta"><span class="pub-status review">Under review</span><span class="sep">&middot;</span>KDD 2027</div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">CAREBENCH: When Correct Diagnoses Come from Unsafe Reasoning</div>
+        <div class="pub-authors">E. Hossain, <strong>T. Nuzhat</strong>, S. R. Dipta, I. Garibay, A. Rivera-Sepulveda, N. Yousefi</div>
+        <div class="pub-meta"><span class="pub-status review">Under review</span><span class="sep">&middot;</span>AAAI 2027</div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">MedBayes-Lite: A Clinical Uncertainty Governance Layer for Risk-Aware Medical Decision Support</div>
+        <div class="pub-authors">E. Hossain, M. M. H. Nipu, M. Sheikh, <strong>T. Nuzhat</strong>, R. Rana, S. Neupane, B. W. Schuller, N. Yousefi</div>
+        <div class="pub-meta"><span class="pub-status preprint">Preprint</span><span class="sep">&middot;</span>arXiv, 2026<span class="sep">&middot;</span><a href="https://arxiv.org/abs/2511.16625" target="_blank" rel="noopener">arXiv</a></div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">R-GAT: Cancer Document Classification Leveraging a Graph-Based Residual Network for Scenarios with Limited Data</div>
+        <div class="pub-authors">E. Hossain, <strong>T. Nuzhat</strong>, S. Masum, S. Rahimi, N. A. Golilarz</div>
+        <div class="pub-meta"><span class="pub-status published">Published</span><span class="sep">&middot;</span>Scientific Reports (Nature Portfolio), 2026<span class="sep">&middot;</span><a href="https://www.nature.com/articles/s41598-026-39894-6" target="_blank" rel="noopener">Article</a></div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">PEFT A2Z: Parameter-Efficient Fine-Tuning Survey for Large Language and Vision Models</div>
+        <div class="pub-authors">N. J. Prottasha, U. Roy Chowdhury, S. Mohanto, <strong>T. Nuzhat</strong>, A. As Sami, M. S. Ali, M. S. I. Sobuj, H. Raman, M. Kowsher, O. O. Garibay</div>
+        <div class="pub-meta"><span class="pub-status preprint">Preprint</span><span class="sep">&middot;</span>arXiv, 2025<span class="sep">&middot;</span><a href="https://arxiv.org/abs/2504.14117" target="_blank" rel="noopener">arXiv</a></div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">Microwave Imaging: CPW-Fed Microstrip Patch Antenna with Defected Ground Plane Operating in ISM Band for Breast Tumor Detection</div>
+        <div class="pub-authors">G. K. Dey, <strong>T. Nuzhat</strong>, K. P. Das, F. Ali</div>
+        <div class="pub-meta"><span class="pub-status published">Published</span><span class="sep">&middot;</span>APCC 2022, South Korea<span class="sep">&middot;</span><a href="https://ieeexplore.ieee.org/document/9943698/" target="_blank" rel="noopener">IEEE Xplore</a></div>
+      </li>
+    </ol>
+  </section>
 
-        <div class="callout">
-          <span class="ico">📢</span>
-          <div>Seeking <strong>Research Scientist / Applied Scientist internships</strong> (Summer 2027) in large language models, agentic AI, and trustworthy machine learning. F-1 international student, CPT-eligible. Please <a href="mailto:Ornitasfia3@gmail.com">reach out</a> if you have an opening.</div>
-        </div>
-      </section>
+  <section class="block reveal" id="skills">
+    <div class="eyebrow">Capabilities</div>
+    <h2>Skills</h2>
+    <div class="skills-list">
+      <div class="skill-row"><strong>Generative &amp; Deep Learning:</strong> diffusion models (discrete / graph) &amp; multi-objective optimization, generative modeling for molecules, large language models, fine-tuning &amp; PEFT (LoRA), RAG, GANs, graph neural networks, computer vision (segmentation, detection, image translation)</div>
+      <div class="skill-row"><strong>Trustworthy &amp; Applied ML:</strong> uncertainty quantification, explainable AI, LLM evaluation &amp; safety / alignment benchmarking, predictive modeling for clinical and materials-science data</div>
+      <div class="skill-row"><strong>Programming &amp; Tools:</strong> Python, C/C++, JavaScript, SQL, PyTorch, TensorFlow, Hugging Face Transformers, Git</div>
+    </div>
+  </section>
 
-      <section id="news" class="reveal">
-        <div class="section-label">News</div>
-        <h2>Recent updates</h2>
-        <div class="news-list">
-          <div class="news-item">
-            <div class="news-date">Sep 2026</div>
-            <div>&#9989; <strong>NEXUS</strong> (structured runtime safety for tool-using LLM agents) accepted to <strong>AACL-IJCNLP 2026</strong>.</div>
-          </div>
-          <div class="news-item">
-            <div class="news-date">Jul 2026</div>
-            <div>&#128228; Submitted <strong>ChannelGuard</strong> (safety of multi-agent LLM systems) to <strong>KDD 2027</strong>, plus three papers to <strong>AAAI 2027</strong>: MotifRole-Diff, CAREBENCH, and Parametric Temporal Conflict.</div>
-          </div>
-          <div class="news-item">
-            <div class="news-date">May 2026</div>
-            <div>&#127881; First-author paper <a href="https://openreview.net/forum?id=9WTCGrwEUh" target="_blank" rel="noopener"><strong>MoCDiff</strong></a> accepted as a poster at the <strong>ICML 2026 Workshop on Generative &amp; Agentic AI for Biology (GenBio)</strong>: efficient motif-constrained discrete diffusion for molecule generation.</div>
-          </div>
-          <div class="news-item">
-            <div class="news-date">Jan 2026</div>
-            <div>&#127891; Began my <strong>Ph.D. in IEMS</strong> at the University of Central Florida's <strong>Complex Adaptive Systems Lab</strong>, advised by <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a>, and began teaching <strong>STA3032</strong> as a Graduate Teaching Assistant.</div>
-          </div>
-          <div class="news-item">
-            <div class="news-date">Oct 2025</div>
-            <div>&#128218; First-author review <a href="https://doi.org/10.1016/j.jwpe.2025.108760" target="_blank" rel="noopener"><strong>Machine Learning in Photocatalytic Degradation of Organic Dyes</strong></a> published in <strong>Journal of Water Process Engineering</strong> (Elsevier, Q1).</div>
-          </div>
-        </div>
-      </section>
+  <section class="block reveal" id="news">
+    <div class="eyebrow">News</div>
+    <h2>Recent updates</h2>
+    <div class="news-list">
+      <div class="news-item"><div class="news-date">Sep 2026</div><div><strong>NEXUS</strong> (structured runtime safety for tool-using LLM agents) accepted to <strong>AACL-IJCNLP 2026</strong>.</div></div>
+      <div class="news-item"><div class="news-date">Jul 2026</div><div>Submitted <strong>ChannelGuard</strong> to <strong>KDD 2027</strong>, plus three papers to <strong>AAAI 2027</strong>: MotifRole-Diff, CAREBENCH, and Parametric Temporal Conflict.</div></div>
+      <div class="news-item"><div class="news-date">May 2026</div><div>First-author paper <a href="https://openreview.net/forum?id=9WTCGrwEUh" target="_blank" rel="noopener"><strong>MoCDiff</strong></a> accepted as a poster at the ICML 2026 GenBio Workshop.</div></div>
+      <div class="news-item"><div class="news-date">Jan 2026</div><div>Began my <strong>Ph.D. in IEMS</strong> at UCF's Complex Adaptive Systems Lab, advised by <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a>, and began teaching <strong>STA3032</strong> as a Graduate Teaching Assistant.</div></div>
+      <div class="news-item"><div class="news-date">Oct 2025</div><div>First-author review <a href="https://doi.org/10.1016/j.jwpe.2025.108760" target="_blank" rel="noopener"><strong>ML in Photocatalytic Degradation of Organic Dyes</strong></a> published in Journal of Water Process Engineering (Elsevier, Q1).</div></div>
+    </div>
+  </section>
 
-      <section class="reveal" id="publications">
-        <div class="section-label">Selected Work</div>
-        <h2>Featured Publications</h2>
-        <p class="pubs-sub">Check out <a href="https://scholar.google.com/citations?user=ToPoa3EAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a> for a full list of my publications.</p>
+  <section class="block reveal" id="service">
+    <div class="eyebrow">Service</div>
+    <h2>Peer Review</h2>
+    <ul class="service-list">
+      <li>Reviewer, ICML 2026 Workshop on Generative &amp; Agentic AI for Biology (GenBio)</li>
+      <li>Reviewer, NeurIPS 2026 Women in Machine Learning Workshop</li>
+    </ul>
+  </section>
 
-        <div class="filters" id="filters">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="first">First-Author</button>
-          <button class="filter-btn" data-filter="diffusion">Generative Diffusion</button>
-          <button class="filter-btn" data-filter="llm">Trustworthy LLMs</button>
-          <button class="filter-btn" data-filter="bio">Biomedical AI</button>
-          <button class="filter-btn" data-filter="materials">Materials &amp; EM</button>
-        </div>
-
-        <div class="pubs-group-label">&#9733; First-Author Papers</div>
-        <div class="pubs-cards" id="pubs">
-
-          <article class="pub pub-card" data-tag="diffusion first">
-            <div class="pub-thumb t-rl">
-              <span class="pub-status s-pub">Accepted</span>
-              ICML GenBio &middot; 2026
-            </div>
-            <div class="pub-info">
-              <h3>MoCDiff: Efficient Motif-Constrained Discrete Diffusion for Molecule Generation</h3>
-              <div class="pub-authors"><strong>T. Nuzhat</strong>, M. J. I. Basher, S. K. Mishra, O. Garibay, I. Garibay, N. Yousefi</div>
-              <div class="pub-venue-line">ICML 2026 Workshop on Generative &amp; Agentic AI for Biology (GenBio) &middot; Poster</div>
-              <p class="pub-desc">A motif-aware graph-to-sequence tokenizer (mSENT) plus an optimized constrained sampler that raises validity from 85.3% to 90.5% and uniqueness from 75.0% to 97.7% on QM9, at 1.3&ndash;1.6&times; lower wall-clock per candidate on QM9 and MOSES.</p>
-              <div class="pub-links">
-                <a class="pub-pill" href="https://openreview.net/forum?id=9WTCGrwEUh" target="_blank" rel="noopener">OPENREVIEW</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="diffusion first">
-            <div class="pub-thumb t-rl">
-              <span class="pub-status s-rev">Under Review</span>
-              AAAI &middot; 2027
-            </div>
-            <div class="pub-info">
-              <h3>MotifRole-Diff: Risk-Optimal Role-Aware Corruption for Masked Molecular Graph Diffusion</h3>
-              <div class="pub-authors"><strong>T. Nuzhat</strong>, E. Hossain, I. Garibay, N. Yousefi</div>
-              <div class="pub-venue-line">Submitted to AAAI 2027</div>
-              <p class="pub-desc">A role-aware corruption process for masked molecular graph diffusion that allocates noise by structural role, improving the quality&ndash;validity trade-off in generated molecules.</p>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="materials first">
-            <div class="pub-thumb t-nlp">
-              <span class="pub-status s-pub">Published</span>
-              Elsevier Q1 &middot; 2025
-            </div>
-            <div class="pub-info">
-              <h3>A Review on Machine Learning in Photocatalytic Degradation of Organic Dyes from Wastewater: Current Trends and Future Directions</h3>
-              <div class="pub-authors"><strong>T. Nuzhat</strong>, N. A. B. Mohamed Radzi, M. Maruthupandy, S. Yussof</div>
-              <div class="pub-venue-line">Journal of Water Process Engineering, vol.&nbsp;78, 2025 &middot; Elsevier (Q1, IF 6.7)</div>
-              <p class="pub-desc">A first-author review synthesizing how machine learning predicts and optimizes photocatalytic degradation of organic dyes, mapping current trends and open directions.</p>
-              <div class="pub-links">
-                <a class="pub-pill" href="https://doi.org/10.1016/j.jwpe.2025.108760" target="_blank" rel="noopener">ARTICLE</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="bio first">
-            <div class="pub-thumb t-bio2">
-              <span class="pub-status s-pub">Published</span>
-              IEEE-EMBS IECBES &middot; 2024
-            </div>
-            <div class="pub-info">
-              <h3>A Multi-Scale Hyper Representation Network for Semantic Segmentation of Pulmonary Circulation Vessels in Pathology Assessment</h3>
-              <div class="pub-authors"><strong>T. Nuzhat</strong>, S. Mohanto, A. Iqbal</div>
-              <div class="pub-venue-line">IEEE-EMBS IECBES 2024, Malaysia</div>
-              <p class="pub-desc">A multi-scale hyper-convolutional network for segmenting pulmonary circulation vessels to accelerate pathology assessment, reaching a 96.6% Dice score on a standard dataset.</p>
-              <div class="pub-links">
-                <a class="pub-pill" href="https://ieeexplore.ieee.org/document/10991089/" target="_blank" rel="noopener">IEEE XPLORE</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="materials first">
-            <div class="pub-thumb t-nlp">
-              <span class="pub-status s-pub">Published</span>
-              IEEE IEMTRONICS &middot; 2022
-            </div>
-            <div class="pub-info">
-              <h3>Artificial Magnetic Conductor Unit Cell Design Using Machine Learning Algorithms</h3>
-              <div class="pub-authors"><strong>T. Nuzhat</strong>, M. N. Hasan</div>
-              <div class="pub-venue-line">IEEE IEMTRONICS 2022, Toronto, Canada</div>
-              <p class="pub-desc">Replaces costly electromagnetic-simulator optimization with ML surrogates (ANN, KNN, SVM, XGBoost, LASSO) to design an artificial-magnetic-conductor metasurface unit cell.</p>
-              <div class="pub-links">
-                <a class="pub-pill" href="https://ieeexplore.ieee.org/document/9795851/" target="_blank" rel="noopener">IEEE XPLORE</a>
-              </div>
-            </div>
-          </article>
-
-        </div>
-
-        <div class="pubs-group-label">Collaborative &amp; Co-Authored Work</div>
-        <div class="pubs-cards" id="pubsCoauthor">
-
-          <article class="pub pub-card" data-tag="llm">
-            <div class="pub-thumb t-trust">
-              <span class="pub-status s-rev">Under Review</span>
-              AAAI &middot; 2027
-            </div>
-            <div class="pub-info">
-              <h3>Right Knowledge, Wrong Answer: Characterizing Parametric Temporal Conflict in Open-Weight Language Models</h3>
-              <div class="pub-authors">E. Hossain, S. Saha, <strong>T. Nuzhat</strong>, S. S. Jennifer, U. Biswas, S. R. Dipta, R. Rana, N. Yousefi</div>
-              <div class="pub-venue-line">Submitted to AAAI 2027</div>
-              <p class="pub-desc">Characterizes when open-weight LLMs hold the right knowledge yet answer wrongly under temporal conflict, and studies test-time steering to resolve outdated parametric memory.</p>
-              <div class="pub-links">
-                <a class="pub-pill" href="https://arxiv.org/abs/2606.20959" target="_blank" rel="noopener">ARXIV</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="llm">
-            <div class="pub-thumb t-trust">
-              <span class="pub-status s-pub">Accepted</span>
-              AACL-IJCNLP &middot; 2026
-            </div>
-            <div class="pub-info">
-              <h3>NEXUS: Structured Runtime Safety for Tool-Using LLM Agents</h3>
-              <div class="pub-authors">E. Hossain, M. M. H. Nipu, <strong>T. Nuzhat</strong>, R. Rana, N. Yousefi</div>
-              <div class="pub-venue-line">Accepted at AACL-IJCNLP 2026</div>
-              <p class="pub-desc">A structured-plan monitoring layer that inspects and intervenes on tool-using agent trajectories, catching unsafe tool calls before they execute rather than judging outputs after the fact.</p>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="llm">
-            <div class="pub-thumb t-trust">
-              <span class="pub-status s-rev">Under Review</span>
-              KDD &middot; 2027
-            </div>
-            <div class="pub-info">
-              <h3>ChannelGuard: Safe Models Do Not Compose into Safe Multi-Agent Systems</h3>
-              <div class="pub-authors">E. Hossain, M. M. H. Nipu, F. T. J. Faria, <strong>T. Nuzhat</strong>, M. Sheikh</div>
-              <div class="pub-venue-line">Submitted to KDD 2027</div>
-              <p class="pub-desc">Shows that individually safe LLMs can still form unsafe multi-agent systems through their inter-agent channel, and proposes an information-bottleneck defense-in-depth against prompt-injection propagation.</p>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="llm bio">
-            <div class="pub-thumb t-bio">
-              <span class="pub-status s-rev">Under Review</span>
-              AAAI &middot; 2027
-            </div>
-            <div class="pub-info">
-              <h3>CAREBENCH: When Correct Diagnoses Come from Unsafe Reasoning</h3>
-              <div class="pub-authors">E. Hossain, <strong>T. Nuzhat</strong>, S. R. Dipta, I. Garibay, A. Rivera-Sepulveda, N. Yousefi</div>
-              <div class="pub-venue-line">Submitted to AAAI 2027</div>
-              <p class="pub-desc">A benchmark for clinical LLM agents that separates correct answers from safe reasoning, exposing cases where models reach the right diagnosis through unsafe process.</p>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="bio">
-            <div class="pub-thumb t-bio">
-              <span class="pub-status s-pre">Preprint</span>
-              arXiv &middot; 2026
-            </div>
-            <div class="pub-info">
-              <h3>MedBayes-Lite: A Clinical Uncertainty Governance Layer for Risk-Aware Medical Decision Support</h3>
-              <div class="pub-authors">E. Hossain, M. M. H. Nipu, M. Sheikh, <strong>T. Nuzhat</strong>, R. Rana, S. Neupane, B. W. Schuller, N. Yousefi</div>
-              <div class="pub-venue-line">Preprint, 2026 &middot; Under review</div>
-              <p class="pub-desc">A lightweight Bayesian governance layer that turns LLM confidence into calibrated, risk-aware signals for safer medical decision support.</p>
-              <div class="pub-links">
-                <a class="pub-pill" href="https://arxiv.org/abs/2511.16625" target="_blank" rel="noopener">ARXIV</a>
-                <button class="pub-pill pub-bibtex-btn" type="button">BIBTEX</button>
-                <pre class="pub-bibtex-text" hidden>@article{hossain2026medbayes,
-  title={MedBayes-Lite: A Clinical Uncertainty Governance Layer for Risk-Aware Medical Decision Support},
-  author={Hossain, Elias and Nipu, Md Mehedi Hasan and Sheikh, Maleeha and Nuzhat, Tasfia and Rana, Rajib and Neupane, Subash and Schuller, Bjoern W. and Yousefi, Niloofar},
-  journal={arXiv preprint arXiv:2511.16625},
-  year={2026}
-}</pre>
-              </div>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="bio">
-            <div class="pub-thumb t-nature">
-              <span class="pub-status s-pub">Published</span>
-              Nature SR &middot; 2026
-            </div>
-            <div class="pub-info">
-              <h3>R-GAT: Cancer Document Classification Leveraging a Graph-Based Residual Network for Scenarios with Limited Data</h3>
-              <div class="pub-authors">E. Hossain, <strong>T. Nuzhat</strong>, S. Masum, S. Rahimi, N. A. Golilarz</div>
-              <div class="pub-venue-line">Scientific Reports (Nature Portfolio), 2026</div>
-              <p class="pub-desc">A residual graph attention network for biomedical document classification under limited data; matches transformer baselines on cancer abstracts at a fraction of the cost.</p>
-              <div class="pub-links">
-                <a class="pub-pill" href="https://www.nature.com/articles/s41598-026-39894-6" target="_blank" rel="noopener">ARTICLE</a>
-                <button class="pub-pill pub-bibtex-btn" type="button">BIBTEX</button>
-                <pre class="pub-bibtex-text" hidden>@article{hossain2026rgat,
-  title={R-GAT: cancer document classification leveraging a graph-based residual network for scenarios with limited data},
-  author={Hossain, Elias and Nuzhat, Tasfia and Masum, Shamsul and Rahimi, Shahram and Golilarz, Noorbakhsh Amiri},
-  journal={Scientific Reports},
-  year={2026},
-  publisher={Nature Publishing Group}
-}</pre>
-              </div>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="llm">
-            <div class="pub-thumb t-trust">
-              <span class="pub-status s-pre">Preprint</span>
-              arXiv &middot; 2025
-            </div>
-            <div class="pub-info">
-              <h3>PEFT A2Z: Parameter-Efficient Fine-Tuning Survey for Large Language and Vision Models</h3>
-              <div class="pub-authors">N. J. Prottasha, U. Roy Chowdhury, S. Mohanto, <strong>T. Nuzhat</strong>, A. As Sami, M. S. Ali, M. S. I. Sobuj, H. Raman, M. Kowsher, O. O. Garibay</div>
-              <div class="pub-venue-line">Preprint, 2025 &middot; Under review</div>
-              <p class="pub-desc">A comprehensive survey of parameter-efficient fine-tuning methods (LoRA and beyond) across large language and vision models, organizing the design space and trade-offs.</p>
-              <div class="pub-links">
-                <a class="pub-pill" href="https://arxiv.org/abs/2504.14117" target="_blank" rel="noopener">ARXIV</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="pub pub-card" data-tag="materials bio">
-            <div class="pub-thumb t-nlp">
-              <span class="pub-status s-pub">Published</span>
-              APCC &middot; 2022
-            </div>
-            <div class="pub-info">
-              <h3>Microwave Imaging: CPW-Fed Microstrip Patch Antenna with Defected Ground Plane Operating in ISM Band for Breast Tumor Detection</h3>
-              <div class="pub-authors">G. K. Dey, <strong>T. Nuzhat</strong>, K. P. Das, F. Ali</div>
-              <div class="pub-venue-line">APCC 2022, South Korea</div>
-              <p class="pub-desc">A CPW-fed microstrip patch antenna with a defected ground plane operating in the ISM band, designed for microwave-imaging-based breast tumor detection.</p>
-              <div class="pub-links">
-                <a class="pub-pill" href="https://ieeexplore.ieee.org/document/9943698/" target="_blank" rel="noopener">IEEE XPLORE</a>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </section>
-
-    </article>
-  </div>
 </div>
-
-
-<section class="full-section reveal" id="skills">
-  <div class="section-label">Capabilities</div>
-  <h2>Skills</h2>
-  <div class="skills-grid">
-
-    <div class="skill-card">
-      <span class="skill-icon">&#129504;</span>
-      <h3>Generative &amp; Deep Learning</h3>
-      <div class="skill-pills">
-        <span class="skill-pill">Diffusion Models (Discrete / Graph)</span>
-        <span class="skill-pill">Molecule Generation</span>
-        <span class="skill-pill">LLMs</span>
-        <span class="skill-pill">PEFT &amp; LoRA</span>
-        <span class="skill-pill">RAG</span>
-        <span class="skill-pill">GANs</span>
-        <span class="skill-pill">Graph Neural Networks</span>
-        <span class="skill-pill">Computer Vision</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <span class="skill-icon">&#128737;&#65039;</span>
-      <h3>Trustworthy &amp; Applied ML</h3>
-      <div class="skill-pills">
-        <span class="skill-pill">Uncertainty Quantification</span>
-        <span class="skill-pill">Explainable AI</span>
-        <span class="skill-pill">LLM Evaluation &amp; Safety</span>
-        <span class="skill-pill">Clinical Predictive Modeling</span>
-        <span class="skill-pill">Materials-Science ML</span>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <span class="skill-icon">&#128187;</span>
-      <h3>Programming &amp; Tools</h3>
-      <div class="skill-pills">
-        <span class="skill-pill">Python</span>
-        <span class="skill-pill">C / C++</span>
-        <span class="skill-pill">JavaScript</span>
-        <span class="skill-pill">SQL</span>
-        <span class="skill-pill">PyTorch</span>
-        <span class="skill-pill">TensorFlow</span>
-        <span class="skill-pill">Hugging Face</span>
-        <span class="skill-pill">Git</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="full-section reveal" id="projects">
-  <div class="section-label">Selected Projects</div>
-  <h2>Projects</h2>
-  <div class="proj-grid">
-
-    <article class="proj-card">
-      <div class="proj-icon p-safe"><span class="proj-emoji" style="animation: pBob 3s ease-in-out infinite">&#128737;&#65039;</span></div>
-      <div class="proj-content">
-        <div class="proj-year">2026</div>
-        <h3>NEXUS</h3>
-        <p>A structured runtime-safety layer that monitors tool-using LLM agents and intervenes on unsafe tool calls before they execute. Submitted to ACL ARR 2026.</p>
-      </div>
-    </article>
-
-    <article class="proj-card">
-      <div class="proj-icon p-radar"><span class="proj-emoji" style="animation: pSway 3.4s ease-in-out infinite">&#129513;</span></div>
-      <div class="proj-content">
-        <div class="proj-year">2026</div>
-        <h3>ChannelGuard</h3>
-        <p>An information-bottleneck defense for multi-agent LLM systems, limiting how prompt-injection attacks propagate across the inter-agent channel. Submitted to KDD 2027.</p>
-      </div>
-    </article>
-
-    <article class="proj-card">
-      <div class="proj-icon p-pill"><span class="proj-emoji" style="animation: pSpin 5s linear infinite">&#129514;</span></div>
-      <div class="proj-content">
-        <div class="proj-year">2026</div>
-        <h3>MoCDiff</h3>
-        <p>Motif-constrained discrete diffusion for molecule generation, with a motif-aware graph-to-sequence tokenizer and an efficient constrained sampler. <a href="https://openreview.net/forum?id=9WTCGrwEUh" target="_blank" rel="noopener">OpenReview</a></p>
-      </div>
-    </article>
-
-    <article class="proj-card">
-      <div class="proj-icon p-brain"><span class="proj-emoji" style="animation: pPulse 2.6s ease-in-out infinite">&#129504;</span></div>
-      <div class="proj-content">
-        <div class="proj-year">2026</div>
-        <h3>MedBayes-Lite</h3>
-        <p>A lightweight Bayesian governance layer that turns LLM confidence into calibrated, risk-aware signals for safer clinical decision support. <a href="https://arxiv.org/abs/2511.16625" target="_blank" rel="noopener">arXiv</a></p>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<footer>
-  © 2026 Tasfia Nuzhat · Last updated Sep 2026 · University of Central Florida.
-</footer>
-
 </main>
 
+<footer>
+  © 2026 Tasfia Nuzhat · Last updated Sep 2026 · University of Central Florida
+  <div class="foot-links">
+    <a href="mailto:Ornitasfia3@gmail.com">Email</a>
+    <a href="https://scholar.google.com/citations?user=ToPoa3EAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+    <a href="https://orcid.org/0000-0002-2730-1191" target="_blank" rel="noopener">ORCID</a>
+    <a href="https://github.com/Tasfia266" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/tasfia-nuzhat" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
+
 <script>
-  // Animated stat counters fed by stats.json (auto-updated weekly by GitHub Action)
-  (function () {
-    var stats = document.querySelectorAll('.stat .num[data-target]');
-    if (!stats.length) return;
-
-    function animate(el) {
-      var target = parseInt(el.dataset.target, 10) || 0;
-      var suffix = el.dataset.suffix || '';
-      var duration = 1400;
-      var start = performance.now();
-      function tick(now) {
-        var t = Math.min((now - start) / duration, 1);
-        var eased = 1 - Math.pow(1 - t, 3);
-        var value = Math.floor(eased * target);
-        el.textContent = value + (t === 1 ? suffix : '');
-        if (t < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-
-    function applyLive(data) {
-      if (!data) return;
-      var map = {
-        cites:  { val: data.citations,    suffix: '+' },
-        hindex: { val: data.h_index,      suffix: ''  }
-        // pubs intentionally omitted: the Scholar count includes preprints and
-        // under-review items, so the "Pubs" stat is a fixed count of actually
-        // published peer-reviewed work (see data-target on the pubs stat).
-      };
-      stats.forEach(function (el) {
-        var entry = map[el.dataset.metric];
-        if (!entry || typeof entry.val !== 'number') return;
-        el.dataset.target = String(entry.val);
-        el.dataset.suffix = entry.suffix;
-        el.classList.add('live');
-        if (el.dataset.animated) el.textContent = entry.val + entry.suffix;
-      });
-    }
-
-    function setupObserver() {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting && !e.target.dataset.animated) {
-            e.target.dataset.animated = '1';
-            animate(e.target);
-          }
-        });
-      }, { threshold: 0.4 });
-      stats.forEach(function (s) { io.observe(s); });
-    }
-
-    // Fetch live stats from stats.json (auto-updated by the Update Scholar Stats GitHub Action)
-    fetch('stats.json', { cache: 'no-store' })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(applyLive)
-      .catch(function () { /* keep seeded values */ })
-      .finally(setupObserver);
-  })();
-
+  // Theme toggle
   const root = document.documentElement;
   const stored = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (stored === 'dark' || (!stored && prefersDark)) {
-    root.setAttribute('data-theme', 'dark');
-  }
+  if (stored === 'dark' || (!stored && prefersDark)) root.setAttribute('data-theme', 'dark');
   document.getElementById('themeBtn').addEventListener('click', () => {
-    const cur = root.getAttribute('data-theme');
-    const next = cur === 'dark' ? 'light' : 'dark';
-    if (next === 'dark') root.setAttribute('data-theme', 'dark');
-    else root.removeAttribute('data-theme');
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    if (next === 'dark') root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
     localStorage.setItem('theme', next);
   });
 
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const pubs = document.querySelectorAll('.pub');
-  const pubGroups = document.querySelectorAll('.pubs-cards');
-  function refreshGroupVisibility() {
-    pubGroups.forEach(group => {
-      const anyVisible = Array.from(group.children).some(c => !c.classList.contains('hidden'));
-      const label = group.previousElementSibling;
-      if (label && label.classList.contains('pubs-group-label')) {
-        label.classList.toggle('hidden-group', !anyVisible);
-      }
-    });
-  }
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      pubs.forEach(p => {
-        const tags = (p.dataset.tag || '').split(/\s+/);
-        if (filter === 'all' || tags.includes(filter)) p.classList.remove('hidden');
-        else p.classList.add('hidden');
-      });
-      refreshGroupVisibility();
-    });
-  });
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // Mobile hamburger toggle
+  // Mobile nav toggle
   (function () {
     var toggle = document.getElementById('navToggle');
     var links = document.getElementById('navLinks');
@@ -1984,7 +461,6 @@
       links.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', String(open));
     });
-    // Close menu when clicking outside or on a link
     document.addEventListener('click', function (e) {
       if (!links.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
         links.classList.remove('open');
@@ -1992,77 +468,27 @@
       }
     });
     links.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        links.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
+      a.addEventListener('click', function () { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
     });
   })();
 
-  // Nav "More" dropdown
-  (function () {
-    var moreBtn = document.getElementById('moreBtn');
-    var moreMenu = document.getElementById('moreMenu');
-    if (!moreBtn || !moreMenu) return;
-    function close() {
-      moreMenu.setAttribute('hidden', '');
-      moreBtn.setAttribute('aria-expanded', 'false');
-    }
-    function open() {
-      moreMenu.removeAttribute('hidden');
-      moreBtn.setAttribute('aria-expanded', 'true');
-    }
-    moreBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      if (moreMenu.hasAttribute('hidden')) open(); else close();
-    });
-    document.addEventListener('click', function (e) {
-      if (!moreMenu.contains(e.target) && e.target !== moreBtn) close();
-    });
-    moreMenu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', close);
-    });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-  })();
-
-  // BibTeX copy-to-clipboard
-  document.querySelectorAll('.pub-bibtex-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const pre = btn.nextElementSibling;
-      if (!pre) return;
-      const bib = (pre.textContent || '').trim();
-      const orig = btn.textContent;
-      try {
-        await navigator.clipboard.writeText(bib);
-        btn.textContent = 'COPIED!';
-      } catch (e) {
-        btn.textContent = 'COPY FAILED';
+  // Live citation line from stats.json (auto-updatable), falls back to seeded text
+  fetch('stats.json', { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (!data) return;
+      var el = document.getElementById('citeStat');
+      if (el && typeof data.citations === 'number' && typeof data.h_index === 'number') {
+        el.textContent = data.citations + ' citations, h-index ' + data.h_index;
       }
-      setTimeout(() => { btn.textContent = orig; }, 1500);
-    });
-  });
+    })
+    .catch(() => {});
 
-  // Education toggle in the Experience sidebar
-  (function () {
-    var btn = document.getElementById('eduToggle');
-    var list = document.getElementById('eduList');
-    if (!btn || !list) return;
-    btn.addEventListener('click', function () {
-      var open = !list.hidden ? false : true;
-      list.hidden = !open;
-      btn.setAttribute('aria-expanded', String(open));
-      btn.querySelector('.exp-toggle-text').textContent = open ? 'See less' : 'See more';
-      if (open) {
-        // After expansion, smoothly bring the new content into view
-        requestAnimationFrame(function () {
-          var btnRect = btn.getBoundingClientRect();
-          // Scroll so the button sits about 1/3 from the top of the viewport
-          var targetY = window.scrollY + btnRect.top - window.innerHeight * 0.33;
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
-        });
-      }
-    });
-  })();
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
 </body>
