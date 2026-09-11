@@ -8,42 +8,42 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <!-- Fonts load asynchronously so a slow/blocked font CDN never blocks the page from rendering. -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
 <style>
   :root {
-    --bg: #f4f3f8;
-    --bg-elev: #fcfbfe;
-    --ink: #1a1922;
-    --ink-soft: #494654;
-    --ink-muted: #797585;
-    --line: #e4e1ec;
-    --accent: #6d4aa7;
-    --accent-soft: #ece4f5;
-    --accent-ink: #543a86;
-    --pill-bg: #ebe8f2;
-    --pill-ink: #3a3542;
-    --hot-bg: #fde4d6;
-    --hot-border: #e85a4f;
-    --hot-ink: #9a2f25;
-    --shadow: 0 1px 2px rgba(24, 20, 32, 0.04), 0 8px 24px rgba(24, 20, 32, 0.05);
+    --bg: #f5f4ef;
+    --bg-elev: #fffdf8;
+    --ink: #191e1c;
+    --ink-soft: #4a5450;
+    --ink-muted: #7c8985;
+    --line: #e3e0d3;
+    --accent: #0d7a68;
+    --accent-soft: #dcf0ea;
+    --accent-ink: #0a5c4f;
+    --pill-bg: #e8e5d8;
+    --pill-ink: #33413c;
+    --hot-bg: #fdf1da;
+    --hot-border: #c8860f;
+    --hot-ink: #7a5209;
+    --shadow: 0 1px 2px rgba(20, 24, 22, 0.05), 0 8px 24px rgba(20, 24, 22, 0.06);
     --radius: 14px;
   }
   [data-theme="dark"] {
-    --bg: #121016;
-    --bg-elev: #1a1720;
-    --ink: #ece9f2;
-    --ink-soft: #b7b2c4;
-    --ink-muted: #817d8e;
-    --line: #272231;
-    --accent: #b79ae6;
-    --accent-soft: #2a2140;
-    --accent-ink: #cbb4f0;
-    --pill-bg: #221d2b;
-    --pill-ink: #c5c0d2;
-    --hot-bg: #2e1a16;
-    --hot-border: #ff7a6b;
-    --hot-ink: #ffb8a8;
+    --bg: #0e1512;
+    --bg-elev: #151e1a;
+    --ink: #e8efec;
+    --ink-soft: #aebbb6;
+    --ink-muted: #7c8985;
+    --line: #22302a;
+    --accent: #4cd6b8;
+    --accent-soft: #153029;
+    --accent-ink: #7ce6cc;
+    --pill-bg: #1a2521;
+    --pill-ink: #c4d0cb;
+    --hot-bg: #2c2210;
+    --hot-border: #dba53c;
+    --hot-ink: #ffce7a;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.25);
   }
 
@@ -67,7 +67,7 @@
   }
   ::selection { background: var(--accent); color: var(--bg); }
   h1, h2, h3, h4 {
-    font-family: 'Spectral', Georgia, serif;
+    font-family: 'Fraunces', Georgia, serif;
     font-weight: 500;
     letter-spacing: -0.01em;
     line-height: 1.2;
@@ -102,7 +102,7 @@
   }
   .nav-left { display: flex; align-items: center; gap: 18px; }
   .nav-brand {
-    font-family: 'Spectral', serif;
+    font-family: 'Fraunces', serif;
     font-weight: 600;
     font-size: 17px;
     letter-spacing: -0.01em;
@@ -274,7 +274,7 @@
   .avatar {
     width: 140px;
     height: 140px;
-    border-radius: 50%;
+    border-radius: 22px;
     background: var(--accent-soft);
     border: 3px solid var(--accent);
     position: relative;
@@ -328,7 +328,7 @@
     padding: 7px 14px;
     background: var(--accent);
     color: var(--bg-elev);
-    border-radius: 999px;
+    border-radius: 8px;
     font-size: 13px;
     font-weight: 500;
     border: 1px solid var(--accent);
@@ -356,7 +356,7 @@
     flex-wrap: wrap;
   }
   .stat .num {
-    font-family: 'Spectral', serif;
+    font-family: 'Fraunces', serif;
     font-size: 18px;
     font-weight: 600;
     color: var(--ink);
@@ -543,7 +543,7 @@
     padding: 3px 9px;
     background: var(--pill-bg);
     color: var(--pill-ink);
-    border-radius: 999px;
+    border-radius: 8px;
     font-size: 11px;
     font-weight: 500;
     border: 1px solid transparent;
@@ -719,7 +719,7 @@
     position: absolute;
     left: -22px;
     top: 0;
-    font-family: 'Spectral', serif;
+    font-family: 'Fraunces', serif;
     font-size: 16px;
     font-weight: 600;
     color: var(--accent);
@@ -836,7 +836,7 @@
     border: 1px solid var(--line);
     background: transparent;
     color: var(--ink-soft);
-    border-radius: 999px;
+    border-radius: 8px;
     cursor: pointer;
     font-family: inherit;
     font-size: 13px;
@@ -929,7 +929,7 @@
     justify-content: center;
     overflow: hidden;
     color: white;
-    font-family: 'Spectral', serif;
+    font-family: 'Fraunces', serif;
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 0.03em;
@@ -938,7 +938,7 @@
   }
   .pub-thumb.t-bio   { background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%); }
   .pub-thumb.t-rl    { background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%); }
-  .pub-thumb.t-nature{ background: linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%); }
+  .pub-thumb.t-nature{ background: linear-gradient(135deg, #2C5282 0%, #1A365D 100%); }
   .pub-thumb.t-trust { background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%); }
   .pub-thumb.t-nlp   { background: linear-gradient(135deg, #EF6C00 0%, #E65100 100%); }
   .pub-thumb.t-bio2  { background: linear-gradient(135deg, #00838F 0%, #006064 100%); }
@@ -1046,7 +1046,7 @@
   .pub-info .pub-authors { color: var(--ink-soft); font-size: 13.5px; margin-bottom: 4px; line-height: 1.5; }
   .pub-info .pub-authors strong { color: var(--ink); font-weight: 600; }
   .pub-info .pub-venue-line {
-    font-family: 'Spectral', serif;
+    font-family: 'Fraunces', serif;
     font-style: italic;
     font-weight: 600;
     font-size: 14px;
