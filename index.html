@@ -1314,7 +1314,7 @@
     <!-- LEFT SIDEBAR -->
     <aside class="sidebar">
       <div class="avatar">
-        <img id="avatarImg" alt="Tasfia Nuzhat" />
+        <img id="avatarImg" src="assets/photos/photo1.jpg" alt="Tasfia Nuzhat" class="loaded" style="object-position: center 30%;" />
       </div>
       <h1>Tasfia <span class="accent">Nuzhat</span></h1>
       <div class="role">PhD Researcher · UCF</div>
@@ -1360,10 +1360,10 @@
           </div>
           <div class="role-line">
             <span class="role">Graduate Teaching Assistant</span>
-            <span class="date">Jan &ndash; May 2026</span>
+            <span class="date">Jan 2026 &ndash; Now</span>
           </div>
           <div class="mentor">
-            STA3032 Probability &amp; Statistics &middot; grading, office hours
+            STA3032 Probability &amp; Statistics (Spring &amp; Fall 2026) &middot; grading, office hours
           </div>
         </div>
 
@@ -1922,56 +1922,6 @@
       .catch(function () { /* keep seeded values */ })
       .finally(setupObserver);
   })();
-
-  // Profile photo rotator: changes on load, nav clicks, and scroll-up-from-below
-  // Per-photo crop position (defaults to 'center 25%' if not listed)
-  const photoCandidates = [
-    'assets/photos/photo1.jpg',
-    'assets/photos/photo2.jpg',
-    'assets/photos/photo3.jpg',
-  ];
-  const photoCrop = {
-    'assets/photos/photo1.jpg': 'center 30%',
-    'assets/photos/photo2.jpg': 'center 18%',
-    'assets/photos/photo3.jpg': 'left 22%',
-  };
-  const avatarImg = document.getElementById('avatarImg');
-  let currentPhoto = null;
-
-  function rotatePhoto() {
-    if (!avatarImg) return;
-    const pool = photoCandidates.filter(c => c !== currentPhoto);
-    const choice = pool[Math.floor(Math.random() * pool.length)];
-    avatarImg.classList.remove('loaded');
-    avatarImg.onload = () => avatarImg.classList.add('loaded');
-    avatarImg.onerror = () => { rotatePhoto(); };
-    avatarImg.style.objectPosition = photoCrop[choice] || 'center 25%';
-    avatarImg.src = choice;
-    currentPhoto = choice;
-  }
-  rotatePhoto();
-
-  // Change on nav-link click
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.addEventListener('click', rotatePhoto);
-  });
-
-  // Change when user scrolls down past 400px then comes back up near the top
-  let wentDown = false;
-  let scrollTicking = false;
-  window.addEventListener('scroll', () => {
-    if (scrollTicking) return;
-    scrollTicking = true;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      if (y > 400) wentDown = true;
-      if (y < 60 && wentDown) {
-        wentDown = false;
-        rotatePhoto();
-      }
-      scrollTicking = false;
-    });
-  });
 
   const root = document.documentElement;
   const stored = localStorage.getItem('theme');
