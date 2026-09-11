@@ -11,28 +11,28 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
 <style>
   :root {
-    --bg: #f5f4ef;
-    --bg-elev: #fffdf8;
-    --ink: #191e1c;
-    --ink-soft: #4a5450;
-    --ink-muted: #7c8985;
-    --line: #e3e0d3;
-    --accent: #0d7a68;
-    --accent-soft: #dcf0ea;
-    --accent-ink: #0a5c4f;
+    --bg: #faf5f8;
+    --bg-elev: #fffbfd;
+    --ink: #241c22;
+    --ink-soft: #5c4c56;
+    --ink-muted: #8c7a86;
+    --line: #ecdfe8;
+    --accent: #a1487e;
+    --accent-soft: #f6e2ee;
+    --accent-ink: #7d3562;
     --warn-ink: #9a6a12;
-    --shadow: 0 1px 2px rgba(20, 24, 22, 0.05), 0 8px 24px rgba(20, 24, 22, 0.06);
+    --shadow: 0 1px 2px rgba(36, 20, 30, 0.05), 0 8px 24px rgba(36, 20, 30, 0.06);
   }
   [data-theme="dark"] {
-    --bg: #0e1512;
-    --bg-elev: #151e1a;
-    --ink: #e8efec;
-    --ink-soft: #aebbb6;
-    --ink-muted: #7c8985;
-    --line: #22302a;
-    --accent: #4cd6b8;
-    --accent-soft: #153029;
-    --accent-ink: #7ce6cc;
+    --bg: #171115;
+    --bg-elev: #1f1720;
+    --ink: #f2e8ef;
+    --ink-soft: #c7b3c2;
+    --ink-muted: #8c7a86;
+    --line: #33222f;
+    --accent: #e18fc4;
+    --accent-soft: #3a1f34;
+    --accent-ink: #f0aed7;
     --warn-ink: #e0b34e;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.25);
   }
@@ -68,7 +68,7 @@
     border-bottom: 1px solid var(--line);
   }
   .nav-inner {
-    max-width: 720px; margin: 0 auto; padding: 14px 24px;
+    max-width: 780px; margin: 0 auto; padding: 14px 24px;
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
   }
   .nav-brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; color: var(--ink); border: none; }
@@ -105,20 +105,21 @@
   }
 
   /* PAGE WRAP — single column throughout */
-  .page { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  .page { max-width: 780px; margin: 0 auto; padding: 0 24px; }
 
   /* HERO */
-  .hero { display: flex; gap: 24px; align-items: flex-start; padding: 48px 0 8px; }
+  .hero { display: flex; gap: 22px; align-items: flex-start; padding: 44px 0 8px; }
+  .hero-main { display: flex; gap: 20px; align-items: flex-start; flex: 1 1 auto; min-width: 0; }
   .hero-photo {
-    width: 108px; height: 108px; border-radius: 16px; overflow: hidden; flex: 0 0 auto;
+    width: 100px; height: 100px; border-radius: 16px; overflow: hidden; flex: 0 0 auto;
     border: 2px solid var(--line); box-shadow: var(--shadow);
   }
   .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
   .hero-text { min-width: 0; }
-  .hero h1 { font-size: 30px; margin-bottom: 4px; }
+  .hero h1 { font-size: 28px; margin-bottom: 4px; }
   .hero h1 .accent { color: var(--accent); font-style: italic; }
-  .hero-role { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 8px; }
-  .hero-links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--ink-muted); margin-bottom: 14px; }
+  .hero-role { color: var(--ink-soft); font-size: 14px; margin-bottom: 8px; }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12.5px; color: var(--ink-muted); margin-bottom: 14px; }
   .hero-links a { color: var(--ink-muted); border: none; }
   .hero-links a:hover { color: var(--accent-ink); }
   .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
@@ -130,11 +131,44 @@
   .btn:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
   .btn.ghost { background: transparent; color: var(--accent-ink); }
   .btn.ghost:hover { background: var(--accent-soft); }
-  .now-line { font-size: 12.5px; color: var(--ink-muted); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--line); }
-  .now-line strong { color: var(--ink); font-weight: 600; }
-  .now-line a { color: var(--accent-ink); border-bottom: 1px solid var(--accent); font-weight: 600; }
+  .hero-loc { font-size: 12px; color: var(--ink-muted); margin-top: 10px; }
+
+  /* HERO ASIDE — citations & travel, styled as a small side panel */
+  .hero-aside {
+    flex: 0 0 170px;
+    background: var(--accent-soft);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+  }
+  .aside-stats { display: flex; gap: 14px; }
+  .aside-stat { display: flex; flex-direction: column; }
+  .aside-num {
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; color: var(--accent-ink); line-height: 1;
+  }
+  .aside-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-muted); margin-top: 4px;
+  }
+  .aside-src { font-size: 10.5px; color: var(--ink-muted); margin-top: 6px; }
+  .aside-travel { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--accent); }
+  .aside-travel-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent-ink); margin-bottom: 6px; font-weight: 600;
+  }
+  .aside-travel-item { display: flex; flex-direction: column; font-size: 12.5px; color: var(--ink); }
+  .aside-travel-item strong { font-weight: 600; }
+  .aside-travel-item span { font-size: 11px; color: var(--ink-muted); margin-top: 1px; }
+
+  @media (max-width: 720px) {
+    .hero { flex-direction: column; }
+    .hero-aside { flex: 1 1 auto; width: 100%; }
+    .aside-stats { justify-content: center; }
+    .aside-travel { text-align: center; }
+    .aside-travel-item { align-items: center; }
+  }
   @media (max-width: 520px) {
-    .hero { flex-direction: column; align-items: center; text-align: center; }
+    .hero-main { flex-direction: column; align-items: center; text-align: center; }
     .hero-links, .hero-actions { justify-content: center; }
   }
 
@@ -228,6 +262,8 @@
     </button>
     <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
       <a href="#publications">Publications</a>
       <a href="#skills">Skills</a>
       <a href="#news">News</a>
@@ -245,53 +281,64 @@
 <div class="page" id="top">
 
   <header class="hero">
-    <div class="hero-photo"><img src="assets/photos/photo1.jpg" alt="Tasfia Nuzhat" /></div>
-    <div class="hero-text">
-      <h1>Tasfia <span class="accent">Nuzhat</span></h1>
-      <div class="hero-role">Ph.D. Researcher, Industrial Engineering &amp; Management Systems · University of Central Florida</div>
-      <div class="hero-links">
-        <a href="mailto:Ornitasfia3@gmail.com">Ornitasfia3@gmail.com</a>
-        <a href="https://scholar.google.com/citations?user=ToPoa3EAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
-        <a href="https://orcid.org/0000-0002-2730-1191" target="_blank" rel="noopener">ORCID</a>
-        <a href="https://github.com/Tasfia266" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/tasfia-nuzhat" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-      <div class="hero-actions">
-        <a class="btn" href="cv/Tasfia_CV.pdf" target="_blank">Download CV</a>
-        <a class="btn ghost" href="mailto:Ornitasfia3@gmail.com">Get in touch</a>
-      </div>
-      <div class="now-line" id="statsLine">
-        Orlando, FL &middot; <span id="citeStat">36 citations, h-index 3</span> (Google Scholar) &middot; Traveling to <strong>MoML 2026</strong>, Boston.
+    <div class="hero-main">
+      <div class="hero-photo"><img src="assets/photos/photo1.jpg" alt="Tasfia Nuzhat" /></div>
+      <div class="hero-text">
+        <h1>Tasfia <span class="accent">Nuzhat</span></h1>
+        <div class="hero-role">Ph.D. Researcher, Industrial Engineering &amp; Management Systems · University of Central Florida</div>
+        <div class="hero-links">
+          <a href="mailto:Ornitasfia3@gmail.com">Ornitasfia3@gmail.com</a>
+          <a href="https://scholar.google.com/citations?user=ToPoa3EAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://orcid.org/0000-0002-2730-1191" target="_blank" rel="noopener">ORCID</a>
+          <a href="https://github.com/Tasfia266" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/tasfia-nuzhat" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="hero-actions">
+          <a class="btn" href="cv/Tasfia_CV.pdf" target="_blank">Download CV</a>
+          <a class="btn ghost" href="mailto:Ornitasfia3@gmail.com">Get in touch</a>
+        </div>
+        <div class="hero-loc">&#128205; Orlando, FL</div>
       </div>
     </div>
+    <aside class="hero-aside">
+      <div class="aside-stats">
+        <div class="aside-stat"><span class="aside-num" id="citeNum">50+</span><span class="aside-label">Citations</span></div>
+        <div class="aside-stat"><span class="aside-num" id="hIndexNum">3</span><span class="aside-label">h-index</span></div>
+      </div>
+      <div class="aside-src">via Google Scholar</div>
+      <div class="aside-travel">
+        <div class="aside-travel-label">Upcoming Travel</div>
+        <div class="aside-travel-item"><strong>MoML 2026</strong><span>Boston, MA</span></div>
+      </div>
+    </aside>
   </header>
 
   <section class="block reveal" id="about">
     <div class="eyebrow">About</div>
     <h2>Research</h2>
     <div class="bio">
-      <p>I am a Ph.D. researcher in Industrial Engineering &amp; Management Systems at the University of Central Florida's <strong>Complex Adaptive Systems Lab</strong>, advised by <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a>. I'm currently working on <strong>multi-objective optimization for generative diffusion models</strong>, focused on constrained molecule generation, where I study how to balance competing objectives &mdash; validity, novelty, and structural risk &mdash; during sampling. I'm also expanding my research into <strong>AI safety, reasoning, and alignment</strong> for tool-using LLM agents, building on my work on NEXUS, a runtime safety layer that monitors and intervenes on agent behavior before unsafe actions execute. More broadly, I'm interested in trustworthy and biomedical AI: resolving outdated parametric knowledge in language models and building uncertainty-aware systems for clinical decision support. Before my Ph.D. I spent two years as an AI engineer building LLM and retrieval systems over pharmaceutical literature.</p>
+      <p>I am a Ph.D. researcher in Industrial Engineering &amp; Management Systems at the University of Central Florida's <strong>Complex Adaptive Systems Lab</strong>, advised by <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a>. I currently work on <strong>multi-objective optimization for generative diffusion models</strong>, applied to constrained molecule generation. I'm also expanding my research into <strong>AI safety, reasoning, and alignment</strong> for tool-using LLM agents, in collaboration with my research group on NEXUS, a runtime safety layer that monitors and intervenes on agent behavior before unsafe actions execute. Before my Ph.D. I spent two years as an AI engineer building LLM and retrieval systems over pharmaceutical literature.</p>
     </div>
     <ol class="focus-list">
       <li><strong>Multi-Objective Optimization &amp; Generative Diffusion</strong><br/>Constrained molecule generation with motif-aware tokenization and role-aware corruption (MoCDiff, MotifRole-Diff).</li>
-      <li><strong>AI Safety, Reasoning &amp; Alignment</strong><br/>Runtime monitoring and intervention for tool-using LLM agents; safety under multi-agent composition (NEXUS, ChannelGuard, CAREBENCH).</li>
-      <li><strong>Trustworthy &amp; Biomedical AI</strong><br/>Temporal-conflict resolution and uncertainty-aware clinical decision support (Parametric Temporal Conflict, MedBayes-Lite, R-GAT).</li>
+      <li><strong>AI Safety, Reasoning &amp; Alignment</strong><br/>Collaborative work on runtime monitoring and intervention for tool-using LLM agents; safety under multi-agent composition (NEXUS, ChannelGuard, CAREBENCH).</li>
+      <li><strong>Trustworthy &amp; Biomedical AI</strong><br/>Temporal-conflict resolution in language models and biomedical document classification under limited data (Parametric Temporal Conflict, R-GAT).</li>
     </ol>
   </section>
 
   <section class="block reveal" id="experience">
     <div class="eyebrow">Experience</div>
-    <h2>Experience &amp; Education</h2>
+    <h2>Experience</h2>
 
     <div class="tl-row">
-      <div class="tl-head"><span class="tl-where">UCF · Complex Adaptive Systems Lab</span><span class="tl-date">Jan 2026 &ndash; Now</span></div>
-      <div class="tl-role">Graduate Research Assistant &middot; Orlando, FL</div>
-      <div class="tl-detail">Generative diffusion &amp; multi-objective optimization; AI safety, reasoning &amp; alignment. Advisor: <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a></div>
+      <div class="tl-head"><span class="tl-where">UCF · Dept. of IEMS</span><span class="tl-date">Spring &amp; Fall 2026</span></div>
+      <div class="tl-role">Graduate Teaching Assistant &middot; Orlando, FL</div>
+      <div class="tl-detail">STA3032 Probability &amp; Statistics &middot; grading, office hours</div>
     </div>
     <div class="tl-row">
-      <div class="tl-head"><span class="tl-where">UCF · Dept. of IEMS</span><span class="tl-date">Jan 2026 &ndash; Now</span></div>
-      <div class="tl-role">Graduate Teaching Assistant &middot; Orlando, FL</div>
-      <div class="tl-detail">STA3032 Probability &amp; Statistics (Spring &amp; Fall 2026) &middot; grading, office hours</div>
+      <div class="tl-head"><span class="tl-where">UCF · Complex Adaptive Systems Lab</span><span class="tl-date">Summer 2026</span></div>
+      <div class="tl-role">Graduate Research Assistant &middot; Orlando, FL</div>
+      <div class="tl-detail">Generative diffusion &amp; multi-objective optimization; AI safety, reasoning &amp; alignment. Advisor: <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a></div>
     </div>
     <div class="tl-row">
       <div class="tl-head"><span class="tl-where">Delineate Inc.</span><span class="tl-date">Nov 2023 &ndash; Dec 2025</span></div>
@@ -303,6 +350,12 @@
       <div class="tl-role">Graduate Research Assistant &middot; Malaysia</div>
       <div class="tl-detail">Predictive ML for material-property analysis &amp; nanomaterials; led a Q1 journal review</div>
     </div>
+  </section>
+
+  <section class="block reveal" id="education">
+    <div class="eyebrow">Education</div>
+    <h2>Education</h2>
+
     <div class="tl-row">
       <div class="tl-head"><span class="tl-where">University of Central Florida</span><span class="tl-date">Jan 2026 &ndash; Present</span></div>
       <div class="tl-role">Ph.D., Industrial Engineering &amp; Management Systems &middot; CGPA 4.00/4.00</div>
@@ -351,14 +404,24 @@
     <div class="pub-group-title">Co-Authored</div>
     <ol class="pub-list">
       <li class="pub-row">
-        <div class="pub-title">Right Knowledge, Wrong Answer: Characterizing Parametric Temporal Conflict in Open-Weight Language Models</div>
-        <div class="pub-authors">E. Hossain, S. Saha, <strong>T. Nuzhat</strong>, S. S. Jennifer, U. Biswas, S. R. Dipta, R. Rana, N. Yousefi</div>
-        <div class="pub-meta"><span class="pub-status review">Under review</span><span class="sep">&middot;</span>AAAI 2027<span class="sep">&middot;</span><a href="https://arxiv.org/abs/2606.20959" target="_blank" rel="noopener">arXiv</a></div>
-      </li>
-      <li class="pub-row">
         <div class="pub-title">NEXUS: Structured Runtime Safety for Tool-Using LLM Agents</div>
         <div class="pub-authors">E. Hossain, M. M. H. Nipu, <strong>T. Nuzhat</strong>, R. Rana, N. Yousefi</div>
         <div class="pub-meta"><span class="pub-status accepted">Accepted</span><span class="sep">&middot;</span>AACL-IJCNLP 2026</div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">R-GAT: Cancer Document Classification Leveraging a Graph-Based Residual Network for Scenarios with Limited Data</div>
+        <div class="pub-authors">E. Hossain, <strong>T. Nuzhat</strong>, S. Masum, S. Rahimi, N. A. Golilarz</div>
+        <div class="pub-meta"><span class="pub-status published">Published</span><span class="sep">&middot;</span>Scientific Reports (Nature Portfolio), 2026<span class="sep">&middot;</span><a href="https://www.nature.com/articles/s41598-026-39894-6" target="_blank" rel="noopener">Article</a></div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">Microwave Imaging: CPW-Fed Microstrip Patch Antenna with Defected Ground Plane Operating in ISM Band for Breast Tumor Detection</div>
+        <div class="pub-authors">G. K. Dey, <strong>T. Nuzhat</strong>, K. P. Das, F. Ali</div>
+        <div class="pub-meta"><span class="pub-status published">Published</span><span class="sep">&middot;</span>APCC 2022, South Korea<span class="sep">&middot;</span><a href="https://ieeexplore.ieee.org/document/9943698/" target="_blank" rel="noopener">IEEE Xplore</a></div>
+      </li>
+      <li class="pub-row">
+        <div class="pub-title">Right Knowledge, Wrong Answer: Characterizing Parametric Temporal Conflict in Open-Weight Language Models</div>
+        <div class="pub-authors">E. Hossain, S. Saha, <strong>T. Nuzhat</strong>, S. S. Jennifer, U. Biswas, S. R. Dipta, R. Rana, N. Yousefi</div>
+        <div class="pub-meta"><span class="pub-status review">Under review</span><span class="sep">&middot;</span>AAAI 2027<span class="sep">&middot;</span><a href="https://arxiv.org/abs/2606.20959" target="_blank" rel="noopener">arXiv</a></div>
       </li>
       <li class="pub-row">
         <div class="pub-title">ChannelGuard: Safe Models Do Not Compose into Safe Multi-Agent Systems</div>
@@ -371,24 +434,9 @@
         <div class="pub-meta"><span class="pub-status review">Under review</span><span class="sep">&middot;</span>AAAI 2027</div>
       </li>
       <li class="pub-row">
-        <div class="pub-title">MedBayes-Lite: A Clinical Uncertainty Governance Layer for Risk-Aware Medical Decision Support</div>
-        <div class="pub-authors">E. Hossain, M. M. H. Nipu, M. Sheikh, <strong>T. Nuzhat</strong>, R. Rana, S. Neupane, B. W. Schuller, N. Yousefi</div>
-        <div class="pub-meta"><span class="pub-status preprint">Preprint</span><span class="sep">&middot;</span>arXiv, 2026<span class="sep">&middot;</span><a href="https://arxiv.org/abs/2511.16625" target="_blank" rel="noopener">arXiv</a></div>
-      </li>
-      <li class="pub-row">
-        <div class="pub-title">R-GAT: Cancer Document Classification Leveraging a Graph-Based Residual Network for Scenarios with Limited Data</div>
-        <div class="pub-authors">E. Hossain, <strong>T. Nuzhat</strong>, S. Masum, S. Rahimi, N. A. Golilarz</div>
-        <div class="pub-meta"><span class="pub-status published">Published</span><span class="sep">&middot;</span>Scientific Reports (Nature Portfolio), 2026<span class="sep">&middot;</span><a href="https://www.nature.com/articles/s41598-026-39894-6" target="_blank" rel="noopener">Article</a></div>
-      </li>
-      <li class="pub-row">
         <div class="pub-title">PEFT A2Z: Parameter-Efficient Fine-Tuning Survey for Large Language and Vision Models</div>
         <div class="pub-authors">N. J. Prottasha, U. Roy Chowdhury, S. Mohanto, <strong>T. Nuzhat</strong>, A. As Sami, M. S. Ali, M. S. I. Sobuj, H. Raman, M. Kowsher, O. O. Garibay</div>
         <div class="pub-meta"><span class="pub-status preprint">Preprint</span><span class="sep">&middot;</span>arXiv, 2025<span class="sep">&middot;</span><a href="https://arxiv.org/abs/2504.14117" target="_blank" rel="noopener">arXiv</a></div>
-      </li>
-      <li class="pub-row">
-        <div class="pub-title">Microwave Imaging: CPW-Fed Microstrip Patch Antenna with Defected Ground Plane Operating in ISM Band for Breast Tumor Detection</div>
-        <div class="pub-authors">G. K. Dey, <strong>T. Nuzhat</strong>, K. P. Das, F. Ali</div>
-        <div class="pub-meta"><span class="pub-status published">Published</span><span class="sep">&middot;</span>APCC 2022, South Korea<span class="sep">&middot;</span><a href="https://ieeexplore.ieee.org/document/9943698/" target="_blank" rel="noopener">IEEE Xplore</a></div>
       </li>
     </ol>
   </section>
@@ -472,15 +520,15 @@
     });
   })();
 
-  // Live citation line from stats.json (auto-updatable), falls back to seeded text
+  // Live citation/h-index numbers from stats.json (auto-updatable), fall back to seeded values
   fetch('stats.json', { cache: 'no-store' })
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       if (!data) return;
-      var el = document.getElementById('citeStat');
-      if (el && typeof data.citations === 'number' && typeof data.h_index === 'number') {
-        el.textContent = data.citations + ' citations, h-index ' + data.h_index;
-      }
+      var citeEl = document.getElementById('citeNum');
+      var hEl = document.getElementById('hIndexNum');
+      if (citeEl && typeof data.citations === 'number') citeEl.textContent = data.citations + '+';
+      if (hEl && typeof data.h_index === 'number') hEl.textContent = data.h_index;
     })
     .catch(() => {});
 
