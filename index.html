@@ -7,8 +7,8 @@
 <meta name="description" content="PhD researcher at UCF working on multi-objective optimization for generative diffusion, and expanding into AI safety, reasoning, and alignment for LLM agents." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" /></noscript>
 <style>
   :root {
     --bg: #faf5f8;
@@ -40,38 +40,36 @@
   html { scroll-behavior: smooth; scroll-padding-top: 76px; }
   body {
     margin: 0;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.65;
-    font-size: 15.5px;
+    line-height: 1.7;
+    font-size: 17px;
     -webkit-font-smoothing: antialiased;
     transition: background 0.3s ease, color 0.3s ease;
   }
   ::selection { background: var(--accent); color: var(--bg); }
   h1, h2, h3 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 500;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600;
     letter-spacing: -0.01em;
-    line-height: 1.2;
+    line-height: 1.25;
     margin: 0;
   }
   a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
   a:hover { border-bottom-color: var(--accent); }
-  .mono { font-family: 'JetBrains Mono', monospace; }
 
   /* NAV — slim single bar, no icon row, no dropdown */
   .nav {
     position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    background: var(--bg);
     border-bottom: 1px solid var(--line);
   }
   .nav-inner {
     max-width: 780px; margin: 0 auto; padding: 14px 24px;
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
   }
-  .nav-brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; color: var(--ink); border: none; }
+  .nav-brand { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 16px; color: var(--ink); border: none; }
   .nav-brand .dot { color: var(--accent); }
   .nav-links { display: flex; gap: 20px; align-items: center; }
   .nav-links a { color: var(--ink-soft); font-size: 13.5px; font-weight: 500; border: none; }
@@ -116,8 +114,8 @@
   }
   .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
   .hero-text { min-width: 0; }
-  .hero h1 { font-size: 28px; margin-bottom: 4px; }
-  .hero h1 .accent { color: var(--accent); font-style: italic; }
+  .hero h1 { font-size: 29px; font-weight: 600; margin-bottom: 4px; }
+  .hero h1 .accent { color: var(--accent-ink); font-weight: 600; }
   .hero-role { color: var(--ink-soft); font-size: 14px; margin-bottom: 8px; }
   .hero-links { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12.5px; color: var(--ink-muted); margin-bottom: 14px; }
   .hero-links a { color: var(--ink-muted); border: none; }
@@ -144,16 +142,16 @@
   .aside-stats { display: flex; gap: 14px; }
   .aside-stat { display: flex; flex-direction: column; }
   .aside-num {
-    font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; color: var(--accent-ink); line-height: 1;
+    font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 20px; color: var(--accent-ink); line-height: 1;
   }
   .aside-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
+    font-family: 'Source Sans 3', sans-serif; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
     color: var(--ink-muted); margin-top: 4px;
   }
   .aside-src { font-size: 10.5px; color: var(--ink-muted); margin-top: 6px; }
   .aside-travel { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--accent); }
   .aside-travel-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
+    font-family: 'Source Sans 3', sans-serif; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em;
     color: var(--accent-ink); margin-bottom: 6px; font-weight: 600;
   }
   .aside-travel-item { display: flex; flex-direction: column; font-size: 12.5px; color: var(--ink); }
@@ -173,19 +171,19 @@
   }
 
   /* SECTIONS */
-  section.block { padding: 40px 0; border-top: 1px solid var(--line); }
+  section.block { padding: 60px 0; border-top: 1px solid var(--line); }
   .eyebrow {
-    font-family: 'JetBrains Mono', monospace; font-size: 10.5px; text-transform: uppercase;
+    font-family: 'Source Sans 3', sans-serif; font-size: 10.5px; text-transform: uppercase;
     letter-spacing: 0.14em; color: var(--accent-ink); margin-bottom: 10px; font-weight: 600;
   }
   section.block h2 { font-size: 22px; margin-bottom: 16px; }
 
   /* BIO */
-  .bio p { font-size: 15.5px; margin: 0 0 14px; text-align: justify; text-wrap: pretty; hyphens: auto; }
+  .bio p { font-size: 17px; max-width: 68ch; margin: 0 0 16px; text-align: left; }
   .bio p:last-child { margin-bottom: 0; }
   .focus-list { margin: 18px 0 0; padding-left: 20px; }
   .focus-list li { margin-bottom: 10px; font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
-  .focus-list li strong { color: var(--ink); font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; }
+  .focus-list li strong { color: var(--ink); font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 15px; }
   .focus-list li::marker { color: var(--accent); }
 
   /* TIMELINE (experience / education) */
@@ -194,7 +192,7 @@
   .tl-row:first-child { padding-top: 0; }
   .tl-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
   .tl-where { font-weight: 600; font-size: 14.5px; color: var(--ink); }
-  .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-muted); white-space: nowrap; }
+  .tl-date { font-family: 'Source Sans 3', sans-serif; font-size: 11.5px; color: var(--ink-muted); white-space: nowrap; }
   .tl-role { font-size: 13.5px; color: var(--ink-soft); margin-top: 1px; }
   .tl-detail { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; line-height: 1.5; }
   .tl-detail a { color: var(--ink-muted); }
@@ -202,22 +200,22 @@
 
   /* PUBLICATIONS — plain list, no cards, no filters */
   .pub-group-title {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase;
+    font-family: 'Source Sans 3', sans-serif; font-size: 11px; text-transform: uppercase;
     letter-spacing: 0.12em; color: var(--ink-muted); margin: 22px 0 10px; font-weight: 600;
   }
   .pub-group-title:first-of-type { margin-top: 0; }
   ol.pub-list { list-style: none; counter-reset: pub; margin: 0; padding: 0; }
-  .pub-row { counter-increment: pub; padding: 13px 0 13px 30px; position: relative; border-bottom: 1px solid var(--line); }
+  .pub-row { counter-increment: pub; padding: 18px 0 18px 30px; position: relative; border-bottom: 1px solid var(--line); }
   .pub-list:last-of-type .pub-row:last-child { border-bottom: none; }
   .pub-row::before {
     content: counter(pub) ".";
-    position: absolute; left: 0; top: 13px;
-    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-muted);
+    position: absolute; left: 0; top: 18px;
+    font-family: 'Source Sans 3', sans-serif; font-size: 12px; color: var(--ink-muted);
   }
-  .pub-title { font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 3px; }
-  .pub-authors { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 3px; }
+  .pub-title { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.5; margin-bottom: 5px; }
+  .pub-authors { font-size: 13px; color: var(--ink-soft); margin-bottom: 5px; line-height: 1.5; }
   .pub-authors strong { color: var(--ink); font-weight: 600; }
-  .pub-meta { font-size: 12px; color: var(--ink-muted); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
+  .pub-meta { font-size: 12.5px; color: var(--ink-muted); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
   .pub-status { font-weight: 600; }
   .pub-status.published { color: var(--accent-ink); }
   .pub-status.accepted { color: var(--accent-ink); }
@@ -229,13 +227,13 @@
   /* SKILLS — plain categorized text, no card grid */
   .skills-list { display: flex; flex-direction: column; gap: 10px; }
   .skill-row { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
-  .skill-row strong { color: var(--ink); font-family: 'Fraunces', serif; font-weight: 600; font-size: 14.5px; }
+  .skill-row strong { color: var(--ink); font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 14.5px; }
 
   /* NEWS */
   .news-list { display: flex; flex-direction: column; gap: 10px; }
   .news-item { display: grid; grid-template-columns: 82px 1fr; gap: 12px; font-size: 13.5px; color: var(--ink-soft); padding-bottom: 10px; border-bottom: 1px dashed var(--line); }
   .news-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .news-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-ink); }
+  .news-date { font-family: 'Source Sans 3', sans-serif; font-size: 11px; color: var(--accent-ink); }
   .news-item strong { color: var(--ink); font-weight: 600; }
 
   /* SERVICE */
@@ -317,7 +315,8 @@
     <div class="eyebrow">About</div>
     <h2>Research</h2>
     <div class="bio">
-      <p>I am a Ph.D. researcher in Industrial Engineering &amp; Management Systems at the University of Central Florida's <strong>Complex Adaptive Systems Lab</strong>, advised by <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a>. I currently work on <strong>multi-objective optimization for generative diffusion models</strong>, applied to constrained molecule generation. I'm also expanding my research into <strong>AI safety, reasoning, and alignment</strong> for tool-using LLM agents, in collaboration with my research group on NEXUS, a runtime safety layer that monitors and intervenes on agent behavior before unsafe actions execute. Before my Ph.D. I spent two years as an AI engineer building LLM and retrieval systems over pharmaceutical literature.</p>
+      <p>I am a Ph.D. researcher in Industrial Engineering &amp; Management Systems at the University of Central Florida, where I work in the <strong>Complex Adaptive Systems Lab</strong> under the supervision of <a href="https://www.cecs.ucf.edu/faculty/niloofar-yousefi/" target="_blank" rel="noopener">Dr. Niloofar Yousefi</a>. My research develops <strong>multi-objective optimization methods for generative diffusion models</strong>, with a broader interest in trustworthy and controllable generative AI.</p>
+      <p>I am also expanding my work into <strong>AI safety, reasoning, and alignment</strong> for tool-using LLM agents. As part of this effort, I collaborate on NEXUS, a runtime safety framework that monitors agent behavior and intervenes before potentially unsafe actions are executed. Before beginning my Ph.D., I spent two years as an AI engineer developing LLM-based retrieval, information-extraction, and scientific knowledge systems for pharmaceutical research.</p>
     </div>
     <ol class="focus-list">
       <li><strong>Multi-Objective Optimization &amp; Generative Diffusion</strong><br/>Constrained molecule generation with motif-aware tokenization and role-aware corruption (MoCDiff, MotifRole-Diff).</li>
